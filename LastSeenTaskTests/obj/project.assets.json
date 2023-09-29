@@ -986,6 +986,19 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "LastSeenTask/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Newtonsoft.Json": "9.0.1"
+        },
+        "compile": {
+          "bin/placeholder/LastSeenTask.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/LastSeenTask.dll": {}
+        }
       }
     }
   },
@@ -3985,10 +3998,16 @@
         "system.xml.xdocument.4.0.11.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "LastSeenTask/1.0.0": {
+      "type": "project",
+      "path": "../LastSeenTask/LastSeenTask.csproj",
+      "msbuildProject": "../../../../../Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "LastSeenTask >= 1.0.0",
       "Microsoft.NET.Test.Sdk >= 17.3.2",
       "NUnit >= 3.13.3",
       "NUnit.Analyzers >= 3.3.0",
@@ -4021,7 +4040,11 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj": {
+              "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

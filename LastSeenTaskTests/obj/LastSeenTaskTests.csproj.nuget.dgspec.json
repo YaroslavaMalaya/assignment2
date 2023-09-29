@@ -4,6 +4,65 @@
     "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/LastSeenTaskTests.csproj": {}
   },
   "projects": {
+    "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj",
+        "projectName": "LastSeenTask",
+        "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj",
+        "packagesPath": "/Users/Yarrochka/.nuget/packages/",
+        "outputPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/Yarrochka/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/Users/Yarrochka/.dotnet/sdk/7.0.101/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/LastSeenTaskTests.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -25,7 +84,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj": {
+                "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

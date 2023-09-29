@@ -1,31 +1,44 @@
 namespace LastSeenTask;
-
 public class LastSeenFormatter
 {
     public string Format(DateTimeOffset now, DateTimeOffset lastSeen)
     {
         var span = now - lastSeen;
-        if (span == TimeSpan.Zero)
+        if (span.TotalSeconds == 0)
         {
             return "online";
         }
-        else if (span < TimeSpan.FromSeconds(30))
+        else if (span.TotalSeconds <= 30)
         {
             return "just now";
         }
-        else if (now.Date == lastSeen.Date)
+        else if (span.TotalSeconds <= 60)
+        {
+            return "less than a minute ago";
+        }
+        else if (span.TotalMinutes <= 59)
+        {
+            return "couple of minutes ago";
+        }
+        else if (span.TotalMinutes <= 119)
+        {
+            return "an hour ago";
+        }
+        else if (span.TotalMinutes <= 23 * 60)
         {
             return "today";
         }
-        else if (now.Date - lastSeen.Date == TimeSpan.FromDays(1))
+        else if (span.TotalMinutes <= 47 * 60)
         {
             return "yesterday";
         }
-        else if (span < TimeSpan.FromDays(7))
+        else if (span.TotalDays < 7)
         {
             return "this week";
         }
         else
+        {
             return "long time ago";
+        }
     }
 }

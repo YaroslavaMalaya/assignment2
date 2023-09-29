@@ -13,7 +13,11 @@ using (HttpClient client = new HttpClient())
             var json =  response.Content.ReadAsStringAsync().Result;
             var userData = JsonConvert.DeserializeObject<UserData>(json);
             var formatter = new LastSeenFormatter();
-
+            if (userData.data == null || userData.data.Length == 0)
+            {
+                return;
+            }
+            
             foreach (User user in userData.data)
             {
                 var formattedLastSeen = formatter.Format(DateTimeOffset.Now, user.LastSeenDate.GetValueOrDefault());

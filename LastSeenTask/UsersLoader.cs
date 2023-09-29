@@ -1,5 +1,5 @@
 using Newtonsoft.Json;
-using LastSeenTask;
+namespace  LastSeenTask;
 
 public class UserData
 {

@@ -18,9 +18,7 @@ using (HttpClient client = new HttpClient())
         foreach (User user in userData.data)
         {
             var formattedLastSeen = formatter.Format(DateTimeOffset.Now, user.LastSeenDate.GetValueOrDefault());
-            Console.WriteLine($"Nickname: {user.Nickname}");
-            Console.WriteLine($"Last Seen: {formattedLastSeen}");
-            Console.WriteLine($"Is Online: {user.IsOnline}\n");
+            Console.WriteLine($"{user.Nickname} was online {formattedLastSeen}.");
         }
 
         offset += 5;

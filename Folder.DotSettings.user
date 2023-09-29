@@ -9,5 +9,6 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c8312656_002Ddbd0_002D4fd6_002D9357_002D207178bfb628/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LastSeenFormatterTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.UsersLoaderTests.CheckUsersLoaderData_LastSeenDateNicknameIsOnline&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

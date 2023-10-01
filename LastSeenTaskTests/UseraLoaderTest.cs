@@ -39,7 +39,7 @@ namespace LastSeenTestProject1
 
             foreach (var user in userData.data)
             {
-                Console.WriteLine($"{user.Nickname} was online at {user.LastSeenDate}.");
+                Console.WriteLine($"{user.Nickname} was online {user.LastSeenDate}.");
             }
 
             outputCapture.StopCapture();

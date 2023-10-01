@@ -4,9 +4,16 @@
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserIsOnline_ShouldReturn_Online&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserWasOnline15SecondsAgo_ShouldReturn_JustNow&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserWasOnline40SecondsAgo_ShouldReturn_LessThanAMinuteAgo&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserWasOnline6DaysAgo_ShouldReturn_ThisWeek&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.ChangeLanguageTests&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c8312656_002Ddbd0_002D4fd6_002D9357_002D207178bfb628/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LastSeenFormatterTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=afb9b613_002Ddeea_002D4209_002Dbea7_002D8222eff5b7f6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ChangeLanguageTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.ChangeLanguageTests&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c8312656_002Ddbd0_002D4fd6_002D9357_002D207178bfb628/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LastSeenFormatterTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests&lt;/TestId&gt;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.UsersLoaderTests.CheckUsersLoaderData_LastSeenDateNicknameIsOnline&lt;/TestId&gt;

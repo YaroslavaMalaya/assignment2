@@ -3,7 +3,7 @@ namespace LastSeenTask;
 
 public class LastSeenFormatter
 {
-    private ChangeLanguage localization = new ChangeLanguage();
+    private readonly ChangeLanguage localization = new ChangeLanguage();
     
     public string Format(DateTimeOffset now, DateTimeOffset lastSeen, string? language)
     {

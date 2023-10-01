@@ -9,3 +9,14 @@
 /Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/obj/Debug/net7.0/LastSeenTask.dll
 /Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/obj/Debug/net7.0/refint/LastSeenTask.dll
 /Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/obj/Debug/net7.0/LastSeenTask.pdb
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/bin/Debug/net7.0/LastSeenTask
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/bin/Debug/net7.0/LastSeenTask.dll
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/bin/Debug/net7.0/LastSeenTask.pdb
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/LastSeenTask.csproj.AssemblyReference.cache
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/LastSeenTask.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/LastSeenTask.AssemblyInfoInputs.cache
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/LastSeenTask.AssemblyInfo.cs
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/LastSeenTask.csproj.CoreCompileInputs.cache
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/LastSeenTask.dll
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/refint/LastSeenTask.dll
+/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/Debug/net7.0/LastSeenTask.pdb

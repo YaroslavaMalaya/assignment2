@@ -13,11 +13,16 @@ public class User
     public bool IsOnline { get; set; }
 }
 
-public class UsersLoader
+public interface IUserDataLoader
+{
+    UserData LoadUsers(int offset);
+}
+
+public class UsersLoader : IUserDataLoader
 {
     private readonly HttpClient _client;
     private readonly LastSeenFormatter _formatter;
-
+ 
     public UsersLoader(HttpClient httpClient)
     {
         _client = httpClient;

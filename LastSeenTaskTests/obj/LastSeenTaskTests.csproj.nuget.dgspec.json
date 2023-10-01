@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/LastSeenTaskTests.csproj": {}
+    "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTaskTests/LastSeenTaskTests.csproj": {}
   },
   "projects": {
-    "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj": {
+    "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/LastSeenTask.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj",
+        "projectUniqueName": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/LastSeenTask.csproj",
         "projectName": "LastSeenTask",
-        "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj",
+        "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/LastSeenTask.csproj",
         "packagesPath": "/Users/Yarrochka/.nuget/packages/",
-        "outputPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/obj/",
+        "outputPath": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/Yarrochka/.nuget/NuGet/NuGet.Config"
@@ -63,14 +63,14 @@
         }
       }
     },
-    "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/LastSeenTaskTests.csproj": {
+    "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTaskTests/LastSeenTaskTests.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/LastSeenTaskTests.csproj",
+        "projectUniqueName": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTaskTests/LastSeenTaskTests.csproj",
         "projectName": "LastSeenTaskTests",
-        "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/LastSeenTaskTests.csproj",
+        "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTaskTests/LastSeenTaskTests.csproj",
         "packagesPath": "/Users/Yarrochka/.nuget/packages/",
-        "outputPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/obj/",
+        "outputPath": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTaskTests/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/Yarrochka/.nuget/NuGet/NuGet.Config"
@@ -85,8 +85,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj": {
-                "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj"
+              "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/LastSeenTask.csproj": {
+                "projectPath": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/LastSeenTask.csproj"
               }
             }
           }

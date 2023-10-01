@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "UdhmjMS4BW/AO8YijS7FnSQqdzmhIXNN4E94X64PtGQKcyESYgo0FS+LZ+mM7z3/9EmiuKxSKVigmkgxMHNK/Q==",
+  "dgSpecHash": "u2rzdxh4KYR/8FznMQQzUOPBPJ1cMZKmN7y32t6+2SLtYUX3VFJm2ACL4zZmIHeL/1MMhGuA+3saMZOF6Q3J1Q==",
   "success": true,
-  "projectFilePath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTask/LastSeenTask.csproj",
+  "projectFilePath": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTask/LastSeenTask.csproj",
   "expectedPackageFiles": [
     "/Users/Yarrochka/.nuget/packages/microsoft.csharp/4.0.1/microsoft.csharp.4.0.1.nupkg.sha512",
     "/Users/Yarrochka/.nuget/packages/microsoft.netcore.platforms/1.0.1/microsoft.netcore.platforms.1.0.1.nupkg.sha512",

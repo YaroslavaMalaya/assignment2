@@ -1,44 +1,50 @@
+using LastSeenTask;
 namespace LastSeenTask;
+
 public class LastSeenFormatter
 {
-    public string Format(DateTimeOffset now, DateTimeOffset lastSeen)
+    private ChangeLanguage localization = new ChangeLanguage();
+    
+    public string Format(DateTimeOffset now, DateTimeOffset lastSeen, string? language)
     {
+        localization.ChangeLang(language);
+        
         var span = now - lastSeen;
         if (span.TotalSeconds == 0)
         {
-            return "online";
+            return localization.result1;
         }
         else if (span.TotalSeconds <= 30)
         {
-            return "just now";
+            return localization.result2;
         }
         else if (span.TotalSeconds <= 60)
         {
-            return "less than a minute ago";
+            return localization.result3;
         }
         else if (span.TotalMinutes <= 59)
         {
-            return "couple of minutes ago";
+            return localization.result4;
         }
         else if (span.TotalMinutes <= 119)
         {
-            return "an hour ago";
+            return localization.result5;
         }
         else if (span.TotalMinutes <= 23 * 60)
         {
-            return "today";
+            return localization.result6;
         }
         else if (span.TotalMinutes <= 47 * 60)
         {
-            return "yesterday";
+            return localization.result7;
         }
         else if (span.TotalDays < 7)
         {
-            return "this week";
+            return localization.result8;
         }
         else
         {
-            return "long time ago";
+            return localization.result9;
         }
     }
 }

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "x/48wbI3lKMzTalk+QSKflyR9E3Lq5TzE+z3HiKuupoK5iHwwrztnaK401q8WLHFx4tSIASI3jHI9sqUYH3Eug==",
+  "dgSpecHash": "RPT7AmZRPIR0oMhRBdZQQLLFjUV8emf8/Eu9oJI8HnfmvEfQAJMKXrbNuT3oUYqoTmIqzVdy+CPGBAW9yLjLGg==",
   "success": true,
-  "projectFilePath": "/Users/Yarrochka/Мої файли/Study/opi/second_assignment/LastSeenTaskTests/LastSeenTaskTests.csproj",
+  "projectFilePath": "/Users/Yarrochka/Мої файли/Study/opi/assignment2/LastSeenTaskTests/LastSeenTaskTests.csproj",
   "expectedPackageFiles": [
     "/Users/Yarrochka/.nuget/packages/coverlet.collector/3.1.2/coverlet.collector.3.1.2.nupkg.sha512",
     "/Users/Yarrochka/.nuget/packages/microsoft.codecoverage/17.3.2/microsoft.codecoverage.17.3.2.nupkg.sha512",

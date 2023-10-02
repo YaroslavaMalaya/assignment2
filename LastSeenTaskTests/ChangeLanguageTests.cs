@@ -15,11 +15,10 @@ public class ChangeLanguageTests
     [Test]
     public void WhenLanguageIsUA_LastSeenFormatterResultsInUA()
     {
-        // Arrange
         var language = "ua";
-        // Act
+
         _changeLanguage.ChangeLang(language);
-        // Assert
+
         Assert.That(_changeLanguage.result1, Is.EqualTo("онлайн"));
         Assert.That(_changeLanguage.result2, Is.EqualTo("тільки що"));
         Assert.That(_changeLanguage.result3, Is.EqualTo("менше хвилини тому"));
@@ -34,11 +33,10 @@ public class ChangeLanguageTests
     [Test]
     public void WhenLanguageIsES_LastSeenFormatterResultsInUES()
     {
-        // Arrange
         var language = "es";
-        // Act
+
         _changeLanguage.ChangeLang(language);
-        // Assert
+
         Assert.That(_changeLanguage.result1, Is.EqualTo("en línea"));
         Assert.That(_changeLanguage.result2, Is.EqualTo("en este momento"));
         Assert.That(_changeLanguage.result3, Is.EqualTo("hace menos de un minuto"));
@@ -53,11 +51,10 @@ public class ChangeLanguageTests
     [Test]
     public void WhenLanguageIsAnother_LastSeenFormatterResultsInEN()
     {
-        // Arrange
         var language = "fr";
-        // Act
+
         _changeLanguage.ChangeLang(language);
-        // Assert
+
         Assert.That(_changeLanguage.result1, Is.EqualTo("online"));
         Assert.That(_changeLanguage.result2, Is.EqualTo("just now"));
         Assert.That(_changeLanguage.result3, Is.EqualTo("less than a minute ago"));

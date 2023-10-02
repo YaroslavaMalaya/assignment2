@@ -1,8 +1,14 @@
 using LastSeenTask;
 namespace LastSeenTask;
 
-public class LastSeenFormatter
+public interface ILastSeenFormatter
 {
+    string Format(DateTimeOffset now, DateTimeOffset lastSeen, string? language);
+}
+
+public class LastSeenFormatter : ILastSeenFormatter
+{
+    private readonly LastSeenFormatter _realFormatter;
     private readonly ChangeLanguage localization = new ChangeLanguage();
     
     public string Format(DateTimeOffset now, DateTimeOffset lastSeen, string? language)

@@ -1,23 +1,23 @@
 namespace LastSeenTask;
 
-public class LoadUsers
+public class ShowUsers
 {
-    private readonly UsersLoader _usersLoader;
-    private readonly LastSeenFormatter _formatter;
+    private readonly IUserDataLoader usersLoader;
+    private readonly ILastSeenFormatter formatter;
 
-    public LoadUsers(UsersLoader usersLoader, LastSeenFormatter formatter)
+    public ShowUsers(IUserDataLoader usersLoader, ILastSeenFormatter formatter)
     {
-        _usersLoader = usersLoader ?? throw new ArgumentNullException(nameof(usersLoader));
-        _formatter = formatter ?? throw new ArgumentNullException(nameof(formatter));
+        this.usersLoader = usersLoader;
+        this.formatter = formatter;
     }
 
-    public void usersShow(string lang)
+    public void UsersShow(string lang)
     {
         var offset = 0;
 
         while (true)
         {
-            var userData = _usersLoader.LoadUsers(offset);
+            var userData = usersLoader.LoadUsers(offset);
             var userCount = userData.data?.Length ?? 0;
 
             if (userCount == 0 || userData.data == null || userData.data.Length == 0)
@@ -27,7 +27,7 @@ public class LoadUsers
 
             foreach (User user in userData.data)
             {
-                var formattedLastSeen = _formatter.Format(DateTimeOffset.Now, user.LastSeenDate.GetValueOrDefault(), lang);
+                var formattedLastSeen = formatter.Format(DateTimeOffset.Now, user.LastSeenDate.GetValueOrDefault(), lang);
                 ConsoleUser(user, formattedLastSeen, lang);
             }
 

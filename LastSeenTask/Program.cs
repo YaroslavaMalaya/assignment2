@@ -6,6 +6,6 @@ var lang = Console.ReadLine();
 using (HttpClient client = new HttpClient())
 {
     var usersLoader = new UsersLoader(client);
-    var users = new LoadUsers(usersLoader, new LastSeenFormatter());
-    users.usersShow(lang);
+    var users = new ShowUsers(usersLoader, new LastSeenFormatter());
+    users.UsersShow(lang);
 }

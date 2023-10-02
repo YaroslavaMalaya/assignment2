@@ -1,84 +1,28 @@
-using LastSeenTask;
+using System.Net;
+using Newtonsoft.Json;
+namespace LastSeenTask.Tests;
 
-namespace LastSeenTestProject1
+[TestFixture]
+public class UsersLoaderTests
 {
-    [TestFixture]
-    public class UsersLoaderTests
+    [Test]
+    public async Task LoadUsers_ReturnsUserData_WhenHttpResponseIsSuccess()
     {
-        private HttpClient _client;
-        private UsersLoader _usersLoader;
-
-        [SetUp]
-        public void Setup()
+        var expectedUserData = new UserData { data = new[]
+            { new User { Nickname = "User1", LastSeenDate = DateTime.Today.AddMinutes(-5) }, 
+                new User { Nickname = "User2", LastSeenDate = DateTime.Today.AddMinutes(-60)}}};
+        var json = JsonConvert.SerializeObject(expectedUserData);
+        var response = new HttpResponseMessage(HttpStatusCode.OK)
         {
-            _client = new HttpClient();
-            _usersLoader = new UsersLoader(_client);
-        }
+            Content = new StringContent(json)
+        };
 
-        [TearDown]
-        public void TearDown()
-        {
-            _client.Dispose();
-        }
+        var handler = new MockHttpMessageHandler(response);
+        var httpClient = new HttpClient(handler);
+        var usersLoader = new UsersLoader(httpClient);
+        var result = usersLoader.LoadUsers(0);
 
-        [Test]
-        public void LoadUsers_SuccessfulResponse_ReturnsUserData()
-        {
-            var userData = _usersLoader.LoadUsers(0);
-
-            Assert.IsNotNull(userData);
-            Assert.IsNotNull(userData.data);
-        }
-
-        [Test]
-        public void CheckUsersLoaderData_LastSeenDateNicknameIsOnline()
-        {
-            var userData = _usersLoader.LoadUsers(0);
-            var outputCapture = new ConsoleCapture();
-            outputCapture.StartCapture();
-
-            foreach (var user in userData.data)
-            {
-                Console.WriteLine($"{user.Nickname} was online {user.LastSeenDate}.");
-            }
-
-            outputCapture.StopCapture();
-            var capturedOutput = outputCapture.GetCapturedText();
-            Assert.IsTrue(capturedOutput.Contains("was online"));
-        }
-    }
-
-    public class ConsoleCapture : IDisposable
-    {
-        private readonly StringWriter _stringWriter;
-        private readonly TextWriter _originalOutput;
-
-        public ConsoleCapture()
-        {
-            _stringWriter = new StringWriter();
-            _originalOutput = Console.Out;
-            Console.SetOut(_stringWriter);
-        }
-
-        public void StartCapture()
-        {
-            _stringWriter.GetStringBuilder().Clear();
-        }
-
-        public void StopCapture()
-        {
-            _stringWriter.Flush();
-        }
-
-        public string GetCapturedText()
-        {
-            return _stringWriter.ToString();
-        }
-
-        public void Dispose()
-        {
-            Console.SetOut(_originalOutput);
-            _stringWriter.Dispose();
-        }
+        Assert.IsNotNull(result);
+        Assert.That(result.data.Length, Is.EqualTo(expectedUserData.data.Length));
     }
 }

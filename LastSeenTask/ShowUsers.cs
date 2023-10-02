@@ -1,3 +1,5 @@
+using System;
+
 namespace LastSeenTask;
 
 public class ShowUsers

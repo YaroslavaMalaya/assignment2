@@ -1,3 +1,4 @@
+using System;
 using Moq;
 using LastSeenTask;
 namespace LastSeenTestProject1;

@@ -1,4 +1,6 @@
-﻿using LastSeenTask;
+﻿using System;
+using System.Net.Http;
+using LastSeenTask;
 
 Console.WriteLine($"Which language are you prefer? (You can choose en, ua, es. The default language is English.): ");
 var lang = Console.ReadLine();

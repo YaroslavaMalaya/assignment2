@@ -14,7 +14,6 @@ public class User
 {
     public DateTimeOffset? LastSeenDate { get; set; }
     public string Nickname { get; set; }
-    //public bool IsOnline { get; set; }
 }
 
 public interface IUserDataLoader
@@ -25,9 +24,12 @@ public interface IUserDataLoader
 public class UsersLoader : IUserDataLoader
 {
     private readonly HttpClient _client;
-    public UsersLoader(HttpClient httpClient)
+    private readonly IHistoricalDataStorage _historicalDataStorage;
+
+    public UsersLoader(HttpClient httpClient, IHistoricalDataStorage historicalDataStorage)
     {
         _client = httpClient;
+        _historicalDataStorage = historicalDataStorage;
     }
     
     public UserData LoadUsers(int offset)
@@ -39,12 +41,20 @@ public class UsersLoader : IUserDataLoader
         {
             var json = response.Content.ReadAsStringAsync().Result;
             var userData = JsonConvert.DeserializeObject<UserData>(json);
+            UpdateHistoricalData(userData.data);
             return userData;
         }
         else
         {
             return new UserData();
         }
+    }
+    
+    private void UpdateHistoricalData(User[] users)
+    {
+        var currentDate = DateTime.UtcNow;
+        var countOfOnlineUsers = users.Count(user => user.LastSeenDate.HasValue && (currentDate - user.LastSeenDate.Value).TotalMinutes <= 60);
+        _historicalDataStorage.UsersOnlineData[currentDate] = countOfOnlineUsers;
     }
 }
 

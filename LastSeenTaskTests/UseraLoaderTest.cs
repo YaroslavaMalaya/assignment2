@@ -1,13 +1,12 @@
-using System;
 using System.Net;
-using System.Net.Http;
-using System.Threading.Tasks;
+using Moq;
 using Newtonsoft.Json;
 namespace LastSeenTask.Tests;
 
 [TestFixture]
 public class UsersLoaderTests
 {
+    
     [Test]
     public async Task LoadUsers_ReturnsUserData_WhenHttpResponseIsSuccess()
     {
@@ -19,10 +18,13 @@ public class UsersLoaderTests
         {
             Content = new StringContent(json)
         };
+        
+        var mockHistoricalDataStorage = new Mock<IHistoricalDataStorage>();
+        mockHistoricalDataStorage.Setup(m => m.UsersOnlineData).Returns(new Dictionary<DateTime, int>());
 
         var handler = new MockHttpMessageHandler(response);
         var httpClient = new HttpClient(handler);
-        var usersLoader = new UsersLoader(httpClient);
+        var usersLoader = new UsersLoader(httpClient, mockHistoricalDataStorage.Object);
         var result = usersLoader.LoadUsers(0);
 
         Assert.IsNotNull(result);

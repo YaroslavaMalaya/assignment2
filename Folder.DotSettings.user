@@ -1,21 +1,24 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3a8dd040_002D8332_002D4896_002Da0fe_002Df76a82698c16/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="When_UserIsOnline_ShouldReturn_Online" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserIsOnline_ShouldReturn_Online&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserWasOnline15SecondsAgo_ShouldReturn_JustNow&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserWasOnline40SecondsAgo_ShouldReturn_LessThanAMinuteAgo&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests.When_UserWasOnline6DaysAgo_ShouldReturn_ThisWeek&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.ChangeLanguageTests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=010a50a2_002Dfbe0_002D407f_002D8a79_002D7d3a003f9afe/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="When_QueryingSpecificDate_Expect_CorrectUsersOnlineCount" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageAllTests.When_QueryingSpecificDate_Expect_CorrectUsersOnlineCount&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=afb9b613_002Ddeea_002D4209_002Dbea7_002D8222eff5b7f6/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="ChangeLanguageTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.ChangeLanguageTests&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7d3486b4_002Df31b_002D4834_002D97b5_002Dbd1695509d4d/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetUsersOnline_ExistingDate_ReturnsCorrectValue #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageAllTests.When_QueryingSpecificDate_Expect_CorrectUsersOnlineCount&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c8312656_002Ddbd0_002D4fd6_002D9357_002D207178bfb628/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LastSeenFormatterTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.LastSeenFormatterTests&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTestProject1.UsersLoaderTests.CheckUsersLoaderData_LastSeenDateNicknameIsOnline&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=836816d7_002D870d_002D41d0_002Dafa2_002D7cd2a78ac2e2/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="HistoricalDataStorageAllTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageAllTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f7acdb91_002D5503_002D4619_002Da00f_002D828557185e24/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="GetUsersOnline_ExistingDate_ReturnsCorrectValue" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageAllTests.GetUsersOnline_ExistingDate_ReturnsCorrectValue&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	
+	</wpf:ResourceDictionary>

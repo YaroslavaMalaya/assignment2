@@ -1,15 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 namespace LastSeenTask;
 
-public class UsersOnlineResponse
-{
-    public int? usersOnline { get; set; }
-}
-
 public interface IHistoricalDataStorage
 {
     Dictionary<DateTime, int> UsersOnlineData { get; set; }
-    void DisplayHistoricalData();
 }
 
 public class HistoricalDataStorage : IHistoricalDataStorage

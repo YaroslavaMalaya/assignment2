@@ -20,11 +20,13 @@ public class UsersLoaderTests
         };
         
         var mockHistoricalDataStorage = new Mock<IHistoricalDataStorage>();
+        var mockHistoricalDataStorageConcrete = new Mock<IHistoricalDataStorageConcrete>();
         mockHistoricalDataStorage.Setup(m => m.UsersOnlineData).Returns(new Dictionary<DateTime, int>());
+        mockHistoricalDataStorageConcrete.Setup(m => m.UserOnlineHistory).Returns(new Dictionary<string, Dictionary<DateTime, bool>>());
 
         var handler = new MockHttpMessageHandler(response);
         var httpClient = new HttpClient(handler);
-        var usersLoader = new UsersLoader(httpClient, mockHistoricalDataStorage.Object);
+        var usersLoader = new UsersLoader(httpClient, mockHistoricalDataStorage.Object, mockHistoricalDataStorageConcrete.Object);
         var result = usersLoader.LoadUsers(0);
 
         Assert.IsNotNull(result);

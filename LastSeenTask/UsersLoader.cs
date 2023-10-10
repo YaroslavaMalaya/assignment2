@@ -25,11 +25,14 @@ public class UsersLoader : IUserDataLoader
 {
     private readonly HttpClient _client;
     private readonly IHistoricalDataStorage _historicalDataStorage;
+    private readonly IHistoricalDataStorageConcrete _historicalDataStorageConcrete;
 
-    public UsersLoader(HttpClient httpClient, IHistoricalDataStorage historicalDataStorage)
+    public UsersLoader(HttpClient httpClient, IHistoricalDataStorage historicalDataStorage, 
+        IHistoricalDataStorageConcrete historicalDataStorageConcrete)
     {
         _client = httpClient;
         _historicalDataStorage = historicalDataStorage;
+        _historicalDataStorageConcrete = historicalDataStorageConcrete;
     }
     
     public UserData LoadUsers(int offset)
@@ -53,6 +56,10 @@ public class UsersLoader : IUserDataLoader
     private void UpdateHistoricalData(User[] users)
     {
         var currentDate = DateTime.UtcNow;
+        foreach (var user in users)
+        {
+            _historicalDataStorageConcrete.AddUserData(currentDate, user);
+        }
         var countOfOnlineUsers = users.Count(user => user.LastSeenDate.HasValue && (currentDate - user.LastSeenDate.Value).TotalMinutes <= 60);
         _historicalDataStorage.UsersOnlineData[currentDate] = countOfOnlineUsers;
     }

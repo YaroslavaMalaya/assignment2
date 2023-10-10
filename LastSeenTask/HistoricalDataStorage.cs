@@ -4,6 +4,7 @@ namespace LastSeenTask;
 public interface IHistoricalDataStorage
 {
     Dictionary<DateTime, int> UsersOnlineData { get; set; }
+    int GetAverageUsersForDayOfWeek(DayOfWeek dayOfWeek);
 }
 
 public class HistoricalDataStorage : IHistoricalDataStorage
@@ -17,6 +18,14 @@ public class HistoricalDataStorage : IHistoricalDataStorage
         {
             Console.WriteLine($"Date: {entry.Key}, Users Online: {entry.Value}");
         }
+    }
+    
+    public int GetAverageUsersForDayOfWeek(DayOfWeek dayOfWeek)
+    {
+        var filteredData = UsersOnlineData.Where(entry => entry.Key.DayOfWeek == dayOfWeek);
+        var keyValuePairs = filteredData.ToList();
+        if (!keyValuePairs.Any()) return 0;
+        return (int)keyValuePairs.Average(entry => entry.Value);
     }
 }
 
@@ -47,4 +56,23 @@ public class StatsController : ControllerBase
     }
 }
 
+[ApiController]
+[Route("api/predictions")]
+public class PredictionsController : ControllerBase
+{
+    private readonly IHistoricalDataStorage _historicalDataStorage;
+
+    public PredictionsController(IHistoricalDataStorage historicalDataStorage)
+    {
+        _historicalDataStorage = historicalDataStorage;
+    }
+
+    [HttpGet("users")]
+    public IActionResult GetPredictedUsersOnline([FromQuery] DateTime date)
+    {
+        var onlineUsers = _historicalDataStorage.GetAverageUsersForDayOfWeek(date.DayOfWeek);
+
+        return Ok(new { onlineUsers });
+    }
+}
  

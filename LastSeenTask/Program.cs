@@ -19,7 +19,8 @@ using (HttpClient client = new HttpClient())
         Console.WriteLine("1 - Display overall historical data.");
         Console.WriteLine("2 - Display historical data for each user.");
         Console.WriteLine("3 - Predict number of users online for a specified date.");
-        Console.WriteLine("4 - Exit.");
+        Console.WriteLine("4 - Calculate online chance for a specific user.");
+        Console.WriteLine("5 - Exit.");
 
         Console.WriteLine("Option: ");
         var choice = Console.ReadLine();
@@ -34,7 +35,10 @@ using (HttpClient client = new HttpClient())
             case "3" :
                 PredictOnlineUsers(historicalDataStorage);
                 break;
-            case "4":
+            case "4" :
+                CalculateOnlineChanceForUser(historicalDataStorageConcrete);
+                break;
+            case "5":
                 continueR = false;
                 break;
             default:
@@ -60,4 +64,29 @@ void PredictOnlineUsers(IHistoricalDataStorage historicalDataStorage)
     {
         Console.WriteLine("Invalid date format. Please try again.");
     }
+}
+
+void CalculateOnlineChanceForUser(IHistoricalDataStorageConcrete historicalDataStorageCon)
+{
+    Console.WriteLine("Enter user ID: ");
+    var userId = Console.ReadLine();
+
+    Console.WriteLine("Enter a date for which you want to predict the online chance (format: YYYY-MM-DD): ");
+    var inputDate = Console.ReadLine();
+    if (!DateTime.TryParse(inputDate, out DateTime date))
+    {
+        Console.WriteLine("Invalid date format. Please try again.");
+        return;
+    }
+
+    Console.WriteLine("Enter tolerance (e.g., 0,1 for 10%): ");
+    if (!double.TryParse(Console.ReadLine(), out var tolerance))
+    {
+        Console.WriteLine("Invalid tolerance value. Please try again.");
+        return;
+    }
+
+    var chance = historicalDataStorageCon.CalculateOnlineChance(date, tolerance, userId);
+
+    Console.WriteLine($"The chance for user {userId} to be online on {date:yyyy-MM-dd} is {chance * 100}%."); 
 }

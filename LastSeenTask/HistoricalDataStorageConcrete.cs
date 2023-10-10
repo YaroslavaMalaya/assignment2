@@ -12,21 +12,23 @@ public interface IHistoricalDataStorageConcrete
     Dictionary<string, Dictionary<DateTime, bool>> UserOnlineHistory { get; set; }
     UserOnlineData GetUserHistoricalData(DateTime date, string userId);
     void AddUserData(DateTimeOffset currentDate, User user);
+    double CalculateOnlineChance(DateTime date, double tolerance, string userId);
 }
 
 public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 {
-    public Dictionary<string, Dictionary<DateTime, bool>> UserOnlineHistory { get; set; } = new Dictionary<string, Dictionary<DateTime, bool>>();
+    public Dictionary<string, Dictionary<DateTime, bool>> UserOnlineHistory { get; set; } = 
+        new Dictionary<string, Dictionary<DateTime, bool>>();
 
     public void DisplayHistoricalDataConcrete()
     {
         Console.WriteLine("\nHistorical User Online Data:");
-        foreach (var userEntry in UserOnlineHistory)
+        foreach (var users in UserOnlineHistory)
         {
-            Console.Write($"\nUser: {userEntry.Key}, ");
-            foreach (var dateEntry in userEntry.Value)
+            Console.Write($"\nUser: {users.Key}, ");
+            foreach (var date in users.Value)
             {
-                Console.Write($"Date: {dateEntry.Key}, Online: {dateEntry.Value}");
+                Console.Write($"Date: {date.Key}, Online: {date.Value}");
             }
         }
     }
@@ -76,6 +78,33 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return new UserOnlineData { WasUserOnline = false, NearestOnlineTime = null };
     }
+    
+    public double CalculateOnlineChance(DateTime date, double tolerance, string userId)
+    {
+        if (!UserOnlineHistory.ContainsKey(userId))
+        {
+            return 0.0;
+        }
+
+        var userHistory = UserOnlineHistory[userId];
+        var dayOfWeek = date.DayOfWeek;
+        var hour = date.Hour;
+        var minute = date.Minute;
+        
+        var toleranceMinutes = (int)(tolerance * 60);
+    
+        var wasOnlineCount = userHistory.Count(kvp => kvp.Key.DayOfWeek == dayOfWeek &&
+                                                      kvp.Key.Hour >= hour - toleranceMinutes/60 && kvp.Key.Hour <= hour + toleranceMinutes/60 
+                                                      && kvp.Key.Minute >= minute - toleranceMinutes%60 && 
+                                                      kvp.Key.Minute <= minute + toleranceMinutes%60 && kvp.Value);
+    
+        var totalWeeks = userHistory.Keys.Max().Subtract(userHistory.Keys.Min()).Days / 7;
+
+        if (totalWeeks == 0)
+            return 0.0;
+
+        return (double)wasOnlineCount / totalWeeks;
+    }
 }
 
 [ApiController]
@@ -102,5 +131,31 @@ public class StatsControllerConcrete : ControllerBase
         }
 
         return Ok(userOnlineData);
+    }
+}
+
+[ApiController]
+[Route("api/predictions")]
+public class PredictionsControllerConcrete : ControllerBase
+{
+    private readonly IHistoricalDataStorageConcrete _userHistoricalData;
+
+    public PredictionsControllerConcrete(IHistoricalDataStorageConcrete userHistoricalData)
+    {
+        _userHistoricalData = userHistoricalData;
+    }
+
+    [HttpGet("user")]
+    public IActionResult GetPredictedUserOnline([FromQuery] DateTime date, [FromQuery] double tolerance, [FromQuery] string userId)
+    {
+        var onlineChance = _userHistoricalData.CalculateOnlineChance(date, tolerance, userId);
+        var willBeOnline = onlineChance > tolerance;
+
+        return Ok(new Dictionary<string, object>
+        {
+            ["willBeOnline"] = willBeOnline,
+            ["onlineChance"] = onlineChance
+        });
+
     }
 }

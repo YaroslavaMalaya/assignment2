@@ -2,7 +2,6 @@ using LastSeenTask;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json.Linq;
-
 namespace LastSeenTaskTests;
 
 public class PredictionsControllerTests

@@ -3,5 +3,7 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageConcreteTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerConcreteTests.GetPredictedUserOnline_UserNeverOnline_ReturnsZeroChance&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerConcreteTests.GetPredictedUserOnline_UserOftenOnline_ReturnsHighChance&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

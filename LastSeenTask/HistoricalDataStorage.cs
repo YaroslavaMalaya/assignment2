@@ -14,18 +14,18 @@ public class HistoricalDataStorage : IHistoricalDataStorage
     public void DisplayHistoricalData()
     {
         Console.WriteLine("\nHistorical Data of Users Online:");
-        foreach (var entry in UsersOnlineData)
+        foreach (var element in UsersOnlineData)
         {
-            Console.WriteLine($"Date: {entry.Key}, Users Online: {entry.Value}");
+            Console.WriteLine($"Date: {element.Key}, Users Online: {element.Value}");
         }
     }
     
     public int GetAverageUsersForDayOfWeek(DayOfWeek dayOfWeek)
     {
-        var filteredData = UsersOnlineData.Where(entry => entry.Key.DayOfWeek == dayOfWeek);
+        var filteredData = UsersOnlineData.Where(element => element.Key.DayOfWeek == dayOfWeek);
         var keyValuePairs = filteredData.ToList();
         if (!keyValuePairs.Any()) return 0;
-        return (int)keyValuePairs.Average(entry => entry.Value);
+        return (int)keyValuePairs.Average(element => element.Value);
     }
 }
 

@@ -56,7 +56,8 @@ public class UsersLoader : IUserDataLoader
         {
             _historicalDataStorageConcrete.AddUserData(currentDate, user);
         }
-        var countOfOnlineUsers = users.Count(user => user.LastSeenDate.HasValue && (currentDate - user.LastSeenDate.Value).TotalMinutes <= 60);
+        var countOfOnlineUsers = users.Count(user => user.LastSeenDate.HasValue && 
+                                                     (currentDate - user.LastSeenDate.Value).TotalMinutes <= 60);
         _historicalDataStorage.UsersOnlineData[currentDate] = countOfOnlineUsers;
     }
 }

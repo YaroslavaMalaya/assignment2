@@ -5,5 +5,15 @@
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerConcreteTests.GetPredictedUserOnline_UserNeverOnline_ReturnsZeroChance&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerConcreteTests.GetPredictedUserOnline_UserOftenOnline_ReturnsHighChance&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ControllersIntegrationTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.GetPredictedUsersOnline_ValidDate_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.GetPredictedUserOnline_ValidInput_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.GetPredictedUserOnlineConcrete_ValidDate_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.GetPredictedUserOnline_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.GetPredictedUsersOnlineConcrete_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.GetUsersOnline_ValidDate_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.GetUsersOnline_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.LoadUsers_ValidResponse_ReturnsUserData&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.LoadUsers_InvalidResponse_ReturnsEmptyUserData&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

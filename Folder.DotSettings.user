@@ -3,6 +3,8 @@
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.TotalTimeOnlineTests.When_QueryingUserTotalOnlineTime_Expect_SuccessfulResponse&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.AverageTimeOnlineTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ForgetUserTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e44ee93c_002D454c_002D421f_002D9512_002Defea33e95e28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="HistoricalDataStorageConcreteTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

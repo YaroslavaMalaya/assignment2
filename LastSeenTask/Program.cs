@@ -22,7 +22,8 @@ using (HttpClient client = new HttpClient())
         Console.WriteLine("4 - Calculate online chance for a specific user.");
         Console.WriteLine("5 - Display total online time for a user.");
         Console.WriteLine("6 - Display average online time for a user.");
-        Console.WriteLine("7 - Exit.");
+        Console.WriteLine("7 - Display average online time for a user.");
+        Console.WriteLine("8 - Exit.");
 
         Console.WriteLine("Option: ");
         var choice = Console.ReadLine();
@@ -47,6 +48,9 @@ using (HttpClient client = new HttpClient())
                 DisplayAverageOnlineTimeForUser(historicalDataStorageConcrete);
                 break;
             case "7":
+                DisplayForgetUser(historicalDataStorageConcrete);
+                break;
+            case "8":
                 continueR = false;
                 break;
             default:
@@ -112,4 +116,12 @@ void DisplayAverageOnlineTimeForUser(IHistoricalDataStorageConcrete historicalDa
     var averageTime = historicalDataStorageCon.CalculateAverages(userNickname);
     Console.WriteLine($"User {userNickname} has a weekly average online time - {averageTime.weeklyAverage} and" +
                       $" a daily average online time - {averageTime.dailyAverage}.");
+}
+
+void DisplayForgetUser(IHistoricalDataStorageConcrete historicalDataStorageCon)
+{
+    Console.WriteLine("Enter user nickname: ");
+    var userNickname = Console.ReadLine();
+    historicalDataStorageCon.ForgetUser(userNickname);
+    Console.WriteLine($"User {userNickname} has been forgotten.");
 }

@@ -16,6 +16,7 @@ public interface IHistoricalDataStorageConcrete
     double CalculateOnlineChance(DateTime date, double tolerance, string userId);
     long GetTotalOnlineTime(string userId);
     (long weeklyAverage, long dailyAverage) CalculateAverages(string userId);
+    void ForgetUser(string userId);
 }
 
 public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
@@ -146,6 +147,14 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return ((long)totalSecondsOnlineWeekly, (long)totalSecondsOnlineDaily);
     }
+    
+    public void ForgetUser(string userId)
+    {
+        if (UserOnlineHistory.ContainsKey(userId))
+        {
+            UserOnlineHistory.Remove(userId);
+        }
+    }
 }
 
 [ApiController]
@@ -191,6 +200,16 @@ public class StatsControllerConcrete : ControllerBase
         {
             weeklyAverage,
             dailyAverage
+        });
+    }
+
+    [HttpPost("forget")]
+    public IActionResult ForgetUser([FromQuery] string userId)
+    {
+        _userHistoricalData.ForgetUser(userId);
+        return Ok(new 
+        {
+            userId = userId
         });
     }
 }

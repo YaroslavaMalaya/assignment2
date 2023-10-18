@@ -20,7 +20,8 @@ using (HttpClient client = new HttpClient())
         Console.WriteLine("2 - Display historical data for each user.");
         Console.WriteLine("3 - Predict number of users online for a specified date.");
         Console.WriteLine("4 - Calculate online chance for a specific user.");
-        Console.WriteLine("5 - Exit.");
+        Console.WriteLine("5 - Display total online time for a user.");
+        Console.WriteLine("6 - Exit.");
 
         Console.WriteLine("Option: ");
         var choice = Console.ReadLine();
@@ -32,13 +33,16 @@ using (HttpClient client = new HttpClient())
             case "2":
                 historicalDataStorageConcrete.DisplayHistoricalDataConcrete();
                 break;
-            case "3" :
+            case "3":
                 PredictOnlineUsers(historicalDataStorage);
                 break;
-            case "4" :
+            case "4":
                 CalculateOnlineChanceForUser(historicalDataStorageConcrete);
                 break;
             case "5":
+                DisplayTotalOnlineTimeForUser(historicalDataStorageConcrete);
+                break;
+            case "6":
                 continueR = false;
                 break;
             default:
@@ -47,7 +51,6 @@ using (HttpClient client = new HttpClient())
         }
     }
 }
-
 return;
 
 void PredictOnlineUsers(IHistoricalDataStorage historicalDataStorage)
@@ -87,6 +90,13 @@ void CalculateOnlineChanceForUser(IHistoricalDataStorageConcrete historicalDataS
     }
 
     var chance = historicalDataStorageCon.CalculateOnlineChance(date, tolerance, userId);
-
     Console.WriteLine($"The chance for user {userId} to be online on {date:yyyy-MM-dd} is {chance * 100}%."); 
+}
+
+void DisplayTotalOnlineTimeForUser(IHistoricalDataStorageConcrete historicalDataStorageCon)
+{
+    Console.WriteLine("Enter user nickname: ");
+    var userNickname = Console.ReadLine();
+    var totalTime = historicalDataStorageCon.GetTotalOnlineTime(userNickname);
+    Console.WriteLine($"User {userNickname} has been online for a total of {totalTime} seconds.");
 }

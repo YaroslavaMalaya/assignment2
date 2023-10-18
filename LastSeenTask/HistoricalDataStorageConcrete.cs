@@ -13,6 +13,7 @@ public interface IHistoricalDataStorageConcrete
     UserOnlineData GetUserHistoricalData(DateTime date, string userId);
     void AddUserData(DateTimeOffset currentDate, User user);
     double CalculateOnlineChance(DateTime date, double tolerance, string userId);
+    long GetTotalOnlineTime(string userId);
 }
 
 public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
@@ -105,6 +106,19 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return (double)wasOnlineCount / totalWeeks;
     }
+    
+    public long GetTotalOnlineTime(string userId)
+    {
+        if (!UserOnlineHistory.ContainsKey(userId))
+        {
+            return 0;
+        }
+
+        var lastSeenTime = UserOnlineHistory[userId].Keys.Max();
+        var timeOnline = DateTime.Now - lastSeenTime;
+
+        return (long)timeOnline.TotalSeconds;
+    }
 }
 
 [ApiController]
@@ -131,6 +145,14 @@ public class StatsControllerConcrete : ControllerBase
         }
 
         return Ok(userOnlineData);
+    }
+    
+    [HttpGet("user/total")]
+    public IActionResult GetUserTotalOnlineTime([FromQuery] string userId)
+    {
+        var totalTime = _userHistoricalData.GetTotalOnlineTime(userId);
+    
+        return Ok(new { totalTime });
     }
 }
 

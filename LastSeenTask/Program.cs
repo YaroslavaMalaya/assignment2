@@ -21,7 +21,8 @@ using (HttpClient client = new HttpClient())
         Console.WriteLine("3 - Predict number of users online for a specified date.");
         Console.WriteLine("4 - Calculate online chance for a specific user.");
         Console.WriteLine("5 - Display total online time for a user.");
-        Console.WriteLine("6 - Exit.");
+        Console.WriteLine("6 - Display average online time for a user.");
+        Console.WriteLine("7 - Exit.");
 
         Console.WriteLine("Option: ");
         var choice = Console.ReadLine();
@@ -43,6 +44,9 @@ using (HttpClient client = new HttpClient())
                 DisplayTotalOnlineTimeForUser(historicalDataStorageConcrete);
                 break;
             case "6":
+                DisplayAverageOnlineTimeForUser(historicalDataStorageConcrete);
+                break;
+            case "7":
                 continueR = false;
                 break;
             default:
@@ -99,4 +103,13 @@ void DisplayTotalOnlineTimeForUser(IHistoricalDataStorageConcrete historicalData
     var userNickname = Console.ReadLine();
     var totalTime = historicalDataStorageCon.GetTotalOnlineTime(userNickname);
     Console.WriteLine($"User {userNickname} has been online for a total of {totalTime} seconds.");
+}
+
+void DisplayAverageOnlineTimeForUser(IHistoricalDataStorageConcrete historicalDataStorageCon)
+{
+    Console.WriteLine("Enter user nickname: ");
+    var userNickname = Console.ReadLine();
+    var averageTime = historicalDataStorageCon.CalculateAverages(userNickname);
+    Console.WriteLine($"User {userNickname} has a weekly average online time - {averageTime.weeklyAverage} and" +
+                      $" a daily average online time - {averageTime.dailyAverage}.");
 }

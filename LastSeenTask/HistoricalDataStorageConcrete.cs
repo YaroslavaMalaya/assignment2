@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.AspNetCore.Mvc;
 namespace LastSeenTask;
 
@@ -14,6 +15,7 @@ public interface IHistoricalDataStorageConcrete
     void AddUserData(DateTimeOffset currentDate, User user);
     double CalculateOnlineChance(DateTime date, double tolerance, string userId);
     long GetTotalOnlineTime(string userId);
+    (long weeklyAverage, long dailyAverage) CalculateAverages(string userId);
 }
 
 public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
@@ -119,6 +121,31 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return (long)timeOnline.TotalSeconds;
     }
+    
+    public (long weeklyAverage, long dailyAverage) CalculateAverages(string userId)
+    {
+        if (!UserOnlineHistory.ContainsKey(userId))
+        {
+            return (0, 0);
+        }
+
+        var userHistory = UserOnlineHistory[userId];
+    
+        var totalSecondsOnlineDaily = userHistory
+            .Where(kvp => kvp.Value)
+            .GroupBy(kvp => kvp.Key.Date)
+            .Select(group => group.Sum(kvp => (kvp.Key - group.Key).TotalSeconds))
+            .Average();
+
+        var totalSecondsOnlineWeekly = userHistory
+            .Where(kvp => kvp.Value)
+            .GroupBy(kvp => new { Year = kvp.Key.Year, Week = 
+                CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(kvp.Key, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday) })
+            .Select(group => group.Sum(kvp => (kvp.Key - group.First().Key).TotalSeconds))
+            .Average();
+
+        return ((long)totalSecondsOnlineWeekly, (long)totalSecondsOnlineDaily);
+    }
 }
 
 [ApiController]
@@ -153,6 +180,18 @@ public class StatsControllerConcrete : ControllerBase
         var totalTime = _userHistoricalData.GetTotalOnlineTime(userId);
     
         return Ok(new { totalTime });
+    }
+    
+    [HttpGet("user/average")]
+    public IActionResult GetUserAverageOnlineTime([FromQuery] string userId)
+    {
+        var (weeklyAverage, dailyAverage) = _userHistoricalData.CalculateAverages(userId);
+    
+        return Ok(new 
+        {
+            weeklyAverage,
+            dailyAverage
+        });
     }
 }
 

@@ -1,10 +1,13 @@
 ﻿using LastSeenTask;
+using Microsoft.AspNetCore.Mvc;
 
 Console.WriteLine("Which language are you prefer? (You can choose en, ua, es. The default language is English.): ");
 var lang = Console.ReadLine();
 
 var historicalDataStorage = new HistoricalDataStorage();
 var historicalDataStorageConcrete = new HistoricalDataStorageConcrete();
+var reports = new Reports(historicalDataStorageConcrete);
+var reportController = new ReportController(reports);
 
 using (HttpClient client = new HttpClient())
 {
@@ -23,7 +26,8 @@ using (HttpClient client = new HttpClient())
         Console.WriteLine("5 - Display total online time for a user.");
         Console.WriteLine("6 - Display average online time for a user.");
         Console.WriteLine("7 - Display average online time for a user.");
-        Console.WriteLine("8 - Exit.");
+        Console.WriteLine("8 - Display User Report.");
+        Console.WriteLine("9 - Exit.");
 
         Console.WriteLine("Option: ");
         var choice = Console.ReadLine();
@@ -51,6 +55,9 @@ using (HttpClient client = new HttpClient())
                 DisplayForgetUser(historicalDataStorageConcrete);
                 break;
             case "8":
+                CreateAndDisplayReport(reportController);
+                break;
+            case "9":
                 continueR = false;
                 break;
             default:
@@ -124,4 +131,68 @@ void DisplayForgetUser(IHistoricalDataStorageConcrete historicalDataStorageCon)
     var userNickname = Console.ReadLine();
     historicalDataStorageCon.ForgetUser(userNickname);
     Console.WriteLine($"User {userNickname} has been forgotten.");
+}
+
+void CreateAndDisplayReport(ReportController reportController)
+{
+    Console.WriteLine("Enter report name: ");
+    var reportName = Console.ReadLine();
+    Console.WriteLine("Enter metrics (comma-separated, e.g. total,dailyAverage): ");
+    var metricsInput = Console.ReadLine();
+    var metrics = metricsInput?.Split(',').ToList() ?? new List<string>();
+    Console.WriteLine("Enter user IDs (comma-separated): ");
+    var userIdsInput = Console.ReadLine();
+    var userIds = userIdsInput?.Split(',').ToList() ?? new List<string>();
+    Console.WriteLine("Enter start date (format: YYYY-MM-DD): ");
+    var startDateInput = Console.ReadLine();
+    if (!DateTime.TryParse(startDateInput, out var startDate))
+    {
+        Console.WriteLine("Invalid start date format. Please try again.");
+        return;
+    }
+    Console.WriteLine("Enter end date (format: YYYY-MM-DD): ");
+    var endDateInput = Console.ReadLine();
+    if (!DateTime.TryParse(endDateInput, out var endDate))
+    {
+        Console.WriteLine("Invalid end date format. Please try again.");
+        return;
+    }
+
+    var reportRequest = new ReportRequest
+    {
+        Metrics = metrics,
+        Users = userIds,
+        StartDate = startDate,
+        EndDate = endDate
+    };
+    var createReportResult = reportController.CreateReport(reportName, reportRequest);
+    if (createReportResult is OkResult)
+    {
+        Console.WriteLine("Report created successfully.");
+    }
+    else if (createReportResult is BadRequestObjectResult badRequestResult)
+    {
+        Console.WriteLine($"Failed to create report: {badRequestResult.Value}");
+        return;
+    }
+
+    var getReportResult = reportController.GetReport(reportName);
+    if (getReportResult is OkObjectResult okObjectResult)
+    {
+        if (okObjectResult.Value is Dictionary<string, ReportResult> reportResults)
+        {
+            foreach (var (userId, reportResult) in reportResults)
+            {
+                Console.WriteLine($"Report for User ID: {userId}");
+                foreach (var (metric, value) in reportResult.Metrics)
+                {
+                    Console.WriteLine($"{metric}: {value}");
+                }
+            }
+        }
+    }
+    else if (getReportResult is NotFoundResult)
+    {
+        Console.WriteLine("Report not found.");
+    }
 }

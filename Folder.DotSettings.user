@@ -5,6 +5,19 @@
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.AverageTimeOnlineTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ForgetUserTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.E2ETests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6bf5658b_002Dcb36_002D4c22_002Da890_002D4895e08228ae/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ReportsTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b6f060f4_002D54ce_002D4d6a_002D8208_002D04388e51ff28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="E2ETests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.E2ETests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e44ee93c_002D454c_002D421f_002D9512_002Defea33e95e28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="HistoricalDataStorageConcreteTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;

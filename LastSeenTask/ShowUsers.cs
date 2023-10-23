@@ -5,20 +5,21 @@ public class ShowUsers
 {
     private readonly IUserDataLoader usersLoader;
     private readonly ILastSeenFormatter formatter;
+    private List<string> forgottenUsers;
 
-    public ShowUsers(IUserDataLoader usersLoader, ILastSeenFormatter formatter)
+    public ShowUsers(IUserDataLoader usersLoader, ILastSeenFormatter formatter, List<string> forgottenUsers)
     {
         this.usersLoader = usersLoader;
         this.formatter = formatter;
+        this.forgottenUsers = forgottenUsers;
     }
 
     public void UsersShow(string lang)
     {
         var offset = 0;
-
         while (true)
         {
-            var userData = usersLoader.LoadUsers(offset);
+            var userData = usersLoader.LoadUsers(offset, forgottenUsers);
             var userCount = userData.data?.Length ?? 0;
 
             if (userCount == 0 || userData.data == null || userData.data.Length == 0)
@@ -28,10 +29,12 @@ public class ShowUsers
 
             foreach (User user in userData.data)
             {
-                var formattedLastSeen = formatter.Format(DateTimeOffset.Now, user.LastSeenDate.GetValueOrDefault(), lang);
-                ConsoleUser(user, formattedLastSeen, lang);
+                if (!forgottenUsers.Contains(user.Nickname))
+                {
+                    var formattedLastSeen = formatter.Format(DateTimeOffset.Now, user.LastSeenDate.GetValueOrDefault(), lang);
+                    ConsoleUser(user, formattedLastSeen, lang);
+                }
             }
-
             offset += userCount;
         }
     }

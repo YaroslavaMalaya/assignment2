@@ -1,8 +1,7 @@
 using System.Net;
 using Newtonsoft.Json;
-using NUnit.Framework;
 using LastSeenTask;
-
+using NUnit.Framework;
 namespace LastSeenTaskTests;
 
 public class E2ETests

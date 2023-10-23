@@ -16,14 +16,13 @@ public interface IHistoricalDataStorageConcrete
     double CalculateOnlineChance(DateTime date, double tolerance, string userId);
     long GetTotalOnlineTime(string userId);
     (long weeklyAverage, long dailyAverage) CalculateAverages(string userId);
-    void ForgetUser(string userId);
+    void ForgetUser(string userId, List<string> forgottenUsers);
 }
 
 public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 {
     public Dictionary<string, Dictionary<DateTime, bool>> UserOnlineHistory { get; set; } = 
         new Dictionary<string, Dictionary<DateTime, bool>>();
-
     public void DisplayHistoricalDataConcrete()
     {
         Console.WriteLine("\nHistorical User Online Data:");
@@ -36,7 +35,6 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
             }
         }
     }
-    
     public void AddUserData(DateTimeOffset time, User user)
     {
         if (user.LastSeenDate.HasValue)
@@ -48,7 +46,6 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
             UserOnlineHistory[user.Nickname][time.DateTime] = true;
         }
     }
-    
     public UserOnlineData GetUserHistoricalData(DateTime date, string userId)
     {
         if (!UserOnlineHistory.ContainsKey(userId))
@@ -82,7 +79,6 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return new UserOnlineData { WasUserOnline = false, NearestOnlineTime = null };
     }
-    
     public double CalculateOnlineChance(DateTime date, double tolerance, string userId)
     {
         if (!UserOnlineHistory.ContainsKey(userId))
@@ -109,7 +105,6 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return (double)wasOnlineCount / totalWeeks;
     }
-    
     public long GetTotalOnlineTime(string userId)
     {
         if (!UserOnlineHistory.ContainsKey(userId))
@@ -122,7 +117,6 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return (long)timeOnline.TotalSeconds;
     }
-    
     public (long weeklyAverage, long dailyAverage) CalculateAverages(string userId)
     {
         if (!UserOnlineHistory.ContainsKey(userId))
@@ -147,12 +141,15 @@ public class HistoricalDataStorageConcrete : IHistoricalDataStorageConcrete
 
         return ((long)totalSecondsOnlineWeekly, (long)totalSecondsOnlineDaily);
     }
-    
-    public void ForgetUser(string userId)
+    public void ForgetUser(string userId, List<string> forgottenUsers)
     {
         if (UserOnlineHistory.ContainsKey(userId))
         {
             UserOnlineHistory.Remove(userId);
+        }
+        if (!forgottenUsers.Contains(userId))
+        {
+            forgottenUsers.Add(userId);
         }
     }
 }
@@ -204,9 +201,9 @@ public class StatsControllerConcrete : ControllerBase
     }
 
     [HttpPost("forget")]
-    public IActionResult ForgetUser([FromQuery] string userId)
+    public IActionResult ForgetUser([FromQuery] string userId, [FromQuery] List<string> forgottenUsers)
     {
-        _userHistoricalData.ForgetUser(userId);
+        _userHistoricalData.ForgetUser(userId, forgottenUsers);
         return Ok(new 
         {
             userId = userId

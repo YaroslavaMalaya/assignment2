@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 Console.WriteLine("Which language are you prefer? (You can choose en, ua, es. The default language is English.): ");
 var lang = Console.ReadLine();
 
+var forgottenUsers = new List<string>();
 var historicalDataStorage = new HistoricalDataStorage();
 var historicalDataStorageConcrete = new HistoricalDataStorageConcrete();
 var reports = new Reports(historicalDataStorageConcrete);
@@ -12,20 +13,21 @@ var reportController = new ReportController(reports);
 using (HttpClient client = new HttpClient())
 {
     var usersLoader = new UsersLoader(client, historicalDataStorage, historicalDataStorageConcrete);
-    var users = new ShowUsers(usersLoader, new LastSeenFormatter());
+    var users = new ShowUsers(usersLoader, new LastSeenFormatter(), forgottenUsers);
     users.UsersShow(lang);
     
     var continueR = true;
     while (continueR)
     {
         Console.WriteLine("\nChoose an option:");
+        Console.WriteLine("0 - Display all users.");
         Console.WriteLine("1 - Display overall historical data.");
         Console.WriteLine("2 - Display historical data for each user.");
         Console.WriteLine("3 - Predict number of users online for a specified date.");
         Console.WriteLine("4 - Calculate online chance for a specific user.");
         Console.WriteLine("5 - Display total online time for a user.");
         Console.WriteLine("6 - Display average online time for a user.");
-        Console.WriteLine("7 - Display average online time for a user.");
+        Console.WriteLine("7 - Display the forgotten user.");
         Console.WriteLine("8 - Display User Report.");
         Console.WriteLine("9 - Exit.");
 
@@ -33,6 +35,11 @@ using (HttpClient client = new HttpClient())
         var choice = Console.ReadLine();
         switch (choice)
         {
+            case "0":
+                usersLoader = new UsersLoader(client, historicalDataStorage, historicalDataStorageConcrete);
+                users = new ShowUsers(usersLoader, new LastSeenFormatter(), forgottenUsers);
+                users.UsersShow(lang);
+                break;
             case "1":
                 historicalDataStorage.DisplayHistoricalData();
                 break;
@@ -52,7 +59,7 @@ using (HttpClient client = new HttpClient())
                 DisplayAverageOnlineTimeForUser(historicalDataStorageConcrete);
                 break;
             case "7":
-                DisplayForgetUser(historicalDataStorageConcrete);
+                DisplayForgetUser(historicalDataStorageConcrete, forgottenUsers);
                 break;
             case "8":
                 CreateAndDisplayReport(reportController);
@@ -125,11 +132,11 @@ void DisplayAverageOnlineTimeForUser(IHistoricalDataStorageConcrete historicalDa
                       $" a daily average online time - {averageTime.dailyAverage}.");
 }
 
-void DisplayForgetUser(IHistoricalDataStorageConcrete historicalDataStorageCon)
+void DisplayForgetUser(IHistoricalDataStorageConcrete historicalDataStorageCon, List<string> forgottenUsers)
 {
     Console.WriteLine("Enter user nickname: ");
     var userNickname = Console.ReadLine();
-    historicalDataStorageCon.ForgetUser(userNickname);
+    historicalDataStorageCon.ForgetUser(userNickname, forgottenUsers);
     Console.WriteLine($"User {userNickname} has been forgotten.");
 }
 

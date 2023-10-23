@@ -14,7 +14,7 @@ public class User
 
 public interface IUserDataLoader
 {
-    UserData LoadUsers(int offset);
+    UserData LoadUsers(int offset, List<string> forgottenUsers);
 }
 
 public class UsersLoader : IUserDataLoader
@@ -31,7 +31,7 @@ public class UsersLoader : IUserDataLoader
         _historicalDataStorageConcrete = historicalDataStorageConcrete;
     }
     
-    public UserData LoadUsers(int offset)
+    public UserData LoadUsers(int offset, List<string> forgottenUsers)
     {
         var apiUrl = $"https://sef.podkolzin.consulting/api/users/lastSeen?offset={offset}";
         var response = _client.GetAsync(apiUrl).Result;
@@ -40,7 +40,7 @@ public class UsersLoader : IUserDataLoader
         {
             var json = response.Content.ReadAsStringAsync().Result;
             var userData = JsonConvert.DeserializeObject<UserData>(json);
-            UpdateHistoricalData(userData.data);
+            UpdateHistoricalData(userData.data, forgottenUsers);
             return userData;
         }
         else
@@ -49,12 +49,13 @@ public class UsersLoader : IUserDataLoader
         }
     }
     
-    private void UpdateHistoricalData(User[] users)
+    private void UpdateHistoricalData(User[] users, List<string> forgottenUsers)
     {
         var currentDate = DateTime.UtcNow;
         foreach (var user in users)
         {
-            _historicalDataStorageConcrete.AddUserData(currentDate, user);
+            if (!forgottenUsers.Contains(user.Nickname))
+                _historicalDataStorageConcrete.AddUserData(currentDate, user);
         }
         var countOfOnlineUsers = users.Count(user => user.LastSeenDate.HasValue && 
                                                      (currentDate - user.LastSeenDate.Value).TotalMinutes <= 60);

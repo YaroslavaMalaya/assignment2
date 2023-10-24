@@ -1,4 +1,5 @@
 using LastSeenTask;
+using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -6,14 +7,24 @@ namespace LastSeenTaskTests;
 
 public class TotalTimeOnlineTests
 {
-    private Mock<IHistoricalDataStorageConcrete> _mockStorageConcrete;
-    private StatsControllerConcrete _controller;
+    private Mock<IHistoricalDataStorage> _mockStorage;
+    private Mock<IHistoricalDataStorageConcrete> _mockHistoricalDataStorage;
+    private ShowUsers _mockShowUsers;
+    private StatsController _controller;
+    private Mock<IUserDataLoader> _mockUserDataLoader;
+    private Mock<ILastSeenFormatter> _mockLastSeenFormatter;
+    private List<string> _mockForgottenUsers; 
 
     [SetUp]
     public void Setup()
     {
-        _mockStorageConcrete = new Mock<IHistoricalDataStorageConcrete>();
-        _controller = new StatsControllerConcrete(null, _mockStorageConcrete.Object);
+        _mockUserDataLoader = new Mock<IUserDataLoader>();
+        _mockLastSeenFormatter = new Mock<ILastSeenFormatter>();
+        _mockForgottenUsers = new List<string>();  
+        _mockStorage = new Mock<IHistoricalDataStorage>(); 
+        _mockHistoricalDataStorage = new Mock<IHistoricalDataStorageConcrete>();
+        _mockShowUsers = new ShowUsers(_mockUserDataLoader.Object, _mockLastSeenFormatter.Object, _mockForgottenUsers);
+        _controller = new StatsController(_mockStorage.Object, _mockShowUsers, _mockHistoricalDataStorage.Object);
     }
 
     [Test]
@@ -21,7 +32,7 @@ public class TotalTimeOnlineTests
     {
         var userId = "User1";
         var expectedTime = 10000L;
-        _mockStorageConcrete.Setup(storage => storage.GetTotalOnlineTime(userId)).Returns(expectedTime);
+        _mockHistoricalDataStorage.Setup(storage => storage.GetTotalOnlineTime(userId)).Returns(expectedTime);
 
         var actionResult = _controller.GetUserTotalOnlineTime(userId);
         var okResult = actionResult as OkObjectResult;

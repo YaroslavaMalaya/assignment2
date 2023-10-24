@@ -27,7 +27,7 @@ public class UsersLoaderTests
         var handler = new MockHttpMessageHandler(response);
         var httpClient = new HttpClient(handler);
         var usersLoader = new UsersLoader(httpClient, mockHistoricalDataStorage.Object, mockHistoricalDataStorageConcrete.Object);
-        var result = usersLoader.LoadUsers(0);
+        var result = usersLoader.LoadUsers(0, new List<string>(), DateTime.Now);
 
         Assert.IsNotNull(result);
         Assert.That(result.data.Length, Is.EqualTo(expectedUserData.data.Length));

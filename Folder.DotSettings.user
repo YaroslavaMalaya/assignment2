@@ -1,5 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=63403871_002Dd472_002D46c7_002Da688_002D0d5af12fce29/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="When_QueryingUserTotalOnlineTime_Expect_SuccessfulResponse" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=63403871_002Dd472_002D46c7_002Da688_002D0d5af12fce29/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="When_QueryingUserTotalOnlineTime_Expect_SuccessfulResponse" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.TotalTimeOnlineTests.When_QueryingUserTotalOnlineTime_Expect_SuccessfulResponse&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.AverageTimeOnlineTests&lt;/TestId&gt;&#xD;
@@ -7,6 +7,7 @@
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.E2ETests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageAllTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=6bf5658b_002Dcb36_002D4c22_002Da890_002D4895e08228ae/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="ReportsTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
@@ -20,7 +21,7 @@
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e44ee93c_002D454c_002D421f_002D9512_002Defea33e95e28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="HistoricalDataStorageConcreteTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e44ee93c_002D454c_002D421f_002D9512_002Defea33e95e28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="HistoricalDataStorageConcreteTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageConcreteTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerTests&lt;/TestId&gt;&#xD;
@@ -37,5 +38,10 @@
     &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.LoadUsers_ValidResponse_ReturnsUserData&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests.LoadUsers_InvalidResponse_ReturnsEmptyUserData&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.TotalTimeOnlineTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerConcreteTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ForgetUserTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageAllTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.AverageTimeOnlineTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

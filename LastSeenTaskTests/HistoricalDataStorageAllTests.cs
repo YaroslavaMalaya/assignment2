@@ -1,4 +1,5 @@
 using LastSeenTask;
+using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json;
@@ -8,13 +9,23 @@ namespace LastSeenTaskTests;
 public class HistoricalDataStorageAllTests
 {
     private Mock<IHistoricalDataStorage> _mockStorage;
+    private Mock<IHistoricalDataStorageConcrete> _mockHistoricalDataStorage;
+    private ShowUsers _mockShowUsers;
     private StatsController _controller;
-    
+    private Mock<IUserDataLoader> _mockUserDataLoader;
+    private Mock<ILastSeenFormatter> _mockLastSeenFormatter;
+    private List<string> _mockForgottenUsers; 
+
     [SetUp]
-    public void SetUp()
+    public void Setup()
     {
-        _mockStorage = new Mock<IHistoricalDataStorage>();
-        _controller = new StatsController(_mockStorage.Object);
+        _mockUserDataLoader = new Mock<IUserDataLoader>();
+        _mockLastSeenFormatter = new Mock<ILastSeenFormatter>();
+        _mockForgottenUsers = new List<string>();  
+        _mockStorage = new Mock<IHistoricalDataStorage>(); 
+        _mockHistoricalDataStorage = new Mock<IHistoricalDataStorageConcrete>();
+        _mockShowUsers = new ShowUsers(_mockUserDataLoader.Object, _mockLastSeenFormatter.Object, _mockForgottenUsers);
+        _controller = new StatsController(_mockStorage.Object, _mockShowUsers, _mockHistoricalDataStorage.Object);
     }
 
     [Test] 

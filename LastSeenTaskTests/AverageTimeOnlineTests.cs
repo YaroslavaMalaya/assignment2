@@ -1,19 +1,29 @@
 using LastSeenTask;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-
+using LastSeenTaskAPI.Controllers;
 namespace LastSeenTaskTests;
 
 public class AverageTimeOnlineTests
 {
-    private Mock<IHistoricalDataStorageConcrete> _mockStorageConcrete;
-    private StatsControllerConcrete _controller;
+    private Mock<IHistoricalDataStorage> _mockStorage;
+    private Mock<IHistoricalDataStorageConcrete> _mockHistoricalDataStorage;
+    private ShowUsers _mockShowUsers;
+    private StatsController _controller;
+    private Mock<IUserDataLoader> _mockUserDataLoader;
+    private Mock<ILastSeenFormatter> _mockLastSeenFormatter;
+    private List<string> _mockForgottenUsers; 
 
     [SetUp]
     public void Setup()
     {
-        _mockStorageConcrete = new Mock<IHistoricalDataStorageConcrete>();
-        _controller = new StatsControllerConcrete(null, _mockStorageConcrete.Object);
+        _mockUserDataLoader = new Mock<IUserDataLoader>();
+        _mockLastSeenFormatter = new Mock<ILastSeenFormatter>();
+        _mockForgottenUsers = new List<string>();  
+        _mockStorage = new Mock<IHistoricalDataStorage>(); 
+        _mockHistoricalDataStorage = new Mock<IHistoricalDataStorageConcrete>();
+        _mockShowUsers = new ShowUsers(_mockUserDataLoader.Object, _mockLastSeenFormatter.Object, _mockForgottenUsers);
+        _controller = new StatsController(_mockStorage.Object, _mockShowUsers, _mockHistoricalDataStorage.Object);
     }
 
     [Test]
@@ -23,7 +33,7 @@ public class AverageTimeOnlineTests
         var expectedWeeklyAverage = 2500L;
         var expectedDailyAverage = 500L;
 
-        _mockStorageConcrete.Setup(storage => storage.CalculateAverages(userId)).Returns((expectedWeeklyAverage, expectedDailyAverage));
+        _mockHistoricalDataStorage.Setup(storage => storage.CalculateAverages(userId)).Returns((expectedWeeklyAverage, expectedDailyAverage));
 
         var actionResult = _controller.GetUserAverageOnlineTime(userId);
         var okResult = actionResult as OkObjectResult;

@@ -1,4 +1,5 @@
 using LastSeenTask;
+using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 
@@ -7,13 +8,13 @@ namespace LastSeenTaskTests;
 public class PredictionsControllerConcreteTests
 {
     private Mock<IHistoricalDataStorageConcrete> _userHistoricalDataMock;
-    private PredictionsControllerConcrete _controller;
+    private PredictionsController _controller;
 
     [SetUp]
     public void SetUp()
     {
         _userHistoricalDataMock = new Mock<IHistoricalDataStorageConcrete>();
-        _controller = new PredictionsControllerConcrete(_userHistoricalDataMock.Object);
+        _controller = new PredictionsController(null, _userHistoricalDataMock.Object);
     }
 
     [Test]

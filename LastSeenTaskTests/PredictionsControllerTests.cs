@@ -1,4 +1,5 @@
 using LastSeenTask;
+using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json.Linq;
@@ -12,7 +13,7 @@ public class PredictionsControllerTests
         var mockDataStorage = new Mock<IHistoricalDataStorage>();
         mockDataStorage.Setup(ds => ds.GetAverageUsersForDayOfWeek(DayOfWeek.Monday)).Returns(100);
             
-        var controller = new PredictionsController(mockDataStorage.Object);
+        var controller = new PredictionsController(mockDataStorage.Object, null);
         var result = controller.GetPredictedUsersOnline(new DateTime(2023, 10, 16));
         var okResult = result as OkObjectResult;
         Assert.IsInstanceOf<OkObjectResult>(result);
@@ -27,7 +28,7 @@ public class PredictionsControllerTests
         var mockDataStorage = new Mock<IHistoricalDataStorage>();
         mockDataStorage.Setup(ds => ds.GetAverageUsersForDayOfWeek(DayOfWeek.Tuesday)).Returns(0);
             
-        var controller = new PredictionsController(mockDataStorage.Object);
+        var controller = new PredictionsController(mockDataStorage.Object, null);
         var result = controller.GetPredictedUsersOnline(new DateTime(2023, 10, 15));
         var okResult = result as OkObjectResult;
         Assert.IsInstanceOf<OkObjectResult>(result);

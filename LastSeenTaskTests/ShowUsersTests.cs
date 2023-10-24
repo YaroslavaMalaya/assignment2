@@ -14,7 +14,7 @@ public class ShowUsersTests
         { new User { Nickname = "User1", LastSeenDate = DateTime.Today.AddMinutes(-5)}, 
             new User { Nickname = "User2", LastSeenDate = DateTime.Today.AddSeconds(-10)} }};
 
-        usersLoaderMock.Setup(loader => loader.LoadUsers(It.IsAny<int>())).Returns(userData1);
+        usersLoaderMock.Setup(loader => loader.LoadUsers(It.IsAny<int>(), new List<string>(), DateTime.Now)).Returns(userData1);
             
         DateTimeOffset check1 = DateTime.Today.AddMinutes(-5);
         DateTimeOffset check2 = DateTime.Today.AddSeconds(-10);

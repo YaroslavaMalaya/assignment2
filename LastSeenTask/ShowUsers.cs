@@ -27,7 +27,8 @@ public class ShowUsers
         var offset = 0;
         while (true)
         {
-            var userData = usersLoader.LoadUsers(offset, forgottenUsers, currentDate);
+            var userData = usersLoader?.LoadUsers(offset, forgottenUsers, currentDate);
+            if(userData == null) return new List<UserResponse>();
             var userCount = userData.data?.Length ?? 0;
 
             if (userCount == 0 || userData.data == null || userData.data.Length == 0)

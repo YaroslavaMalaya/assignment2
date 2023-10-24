@@ -22,7 +22,7 @@ jobs:
 
       - run: npm install
 
-      - name: Print current directory
-        run: pwd && ls -la
-
+      - name: Change working directory
+        run: cd assignment2
+      
       - run: npm test

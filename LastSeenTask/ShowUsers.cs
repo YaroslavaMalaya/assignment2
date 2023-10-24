@@ -22,11 +22,12 @@ public class ShowUsers
     public List<UserResponse> UsersShow(string lang)
     {
         var usersResponses = new List<UserResponse>();
-
+        var currentDate = DateTime.UtcNow;
+        
         var offset = 0;
         while (true)
         {
-            var userData = usersLoader.LoadUsers(offset, forgottenUsers);
+            var userData = usersLoader.LoadUsers(offset, forgottenUsers, currentDate);
             var userCount = userData.data?.Length ?? 0;
 
             if (userCount == 0 || userData.data == null || userData.data.Length == 0)
@@ -42,57 +43,39 @@ public class ShowUsers
                     usersResponses.Add(new UserResponse 
                     {
                         Nickname = user.Nickname, 
-                        LastSeen = GenerateUserMessage(user, formattedLastSeen, lang)
+                        LastSeen = GenerateAndPrintUserMessage(user, formattedLastSeen, lang)
                     });
-                    ConsoleUser(user, formattedLastSeen, lang);
                 }
-            }
+            } 
             offset += userCount;
         }
         return usersResponses;
     }
 
-    private void ConsoleUser(User user, string? lastSeen, string? lang)
+    private string GenerateAndPrintUserMessage(User user, string? lastSeen, string? lang)
     {
-        if (user.LastSeenDate == null)
-        {
-            if (lang == "ua")
-                Console.WriteLine($"{user.Nickname} онлайн.");
-            else if (lang == "es")
-                Console.WriteLine($"{user.Nickname} en línea.");
-            else
-                Console.WriteLine($"{user.Nickname} is online.");
-        }
-        else
-        {
-            if (lang == "ua")
-                Console.WriteLine($"{user.Nickname} був/була онлайн {lastSeen}.");
-            else if (lang == "es")
-                Console.WriteLine($"{user.Nickname} estaba en línea {lastSeen}.");
-            else
-                Console.WriteLine($"{user.Nickname} was online {lastSeen}.");
-        }
-    }
+        string message;
     
-    private string GenerateUserMessage(User user, string? lastSeen, string? lang)
-    {
         if (user.LastSeenDate == null)
         {
             if (lang == "ua")
-                return $"{user.Nickname} онлайн.";
+                message = $"{user.Nickname} онлайн.";
             else if (lang == "es")
-                return $"{user.Nickname} en línea.";
+                message = $"{user.Nickname} en línea.";
             else
-                return $"{user.Nickname} is online.";
+                message = $"{user.Nickname} is online.";
         }
         else
         {
             if (lang == "ua")
-                return $"{user.Nickname} був/була онлайн {lastSeen}.";
+                message = $"{user.Nickname} був/була онлайн {lastSeen}.";
             else if (lang == "es")
-                return $"{user.Nickname} estaba en línea {lastSeen}.";
+                message = $"{user.Nickname} estaba en línea {lastSeen}.";
             else
-                return $"{user.Nickname} was online {lastSeen}.";
+                message = $"{user.Nickname} was online {lastSeen}.";
         }
+    
+        Console.WriteLine(message);
+        return message;
     }
 }

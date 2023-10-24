@@ -8,16 +8,21 @@ public class StatsController : ControllerBase
 {
     private readonly IHistoricalDataStorage _historicalDataStorage;
     private readonly IHistoricalDataStorageConcrete _userHistoricalData;
+    private readonly IUserDataLoader _userDataLoader;
+    private readonly ShowUsers _showUsers;
 
-    public StatsController(IHistoricalDataStorage historicalDataStorage, IHistoricalDataStorageConcrete userHistoricalData)
+    public StatsController(IHistoricalDataStorage historicalDataStorage, ShowUsers showUsers, IHistoricalDataStorageConcrete userHistoricalData)
     {
         _historicalDataStorage = historicalDataStorage;
         _userHistoricalData = userHistoricalData;
+        _showUsers = showUsers;
     }
 
     [HttpGet("users")]
     public IActionResult GetUsersOnline([FromQuery] DateTime date)
     {
+        var usersResponses = _showUsers.UsersShow("en");
+        date = date.Date;
         int? usersOnlineCount = _historicalDataStorage.UsersOnlineData.GetValueOrDefault(date);
 
         if (usersOnlineCount.HasValue)
@@ -33,8 +38,8 @@ public class StatsController : ControllerBase
     [HttpGet("user")]
     public IActionResult GetUserOnlineData([FromQuery] DateTime date, [FromQuery] string userId)
     {
+        var usersResponses = _showUsers.UsersShow("en");
         var userOnlineData = _userHistoricalData.GetUserHistoricalData(date, userId);
-
         if (userOnlineData == null)
         {
             return NotFound();
@@ -46,6 +51,7 @@ public class StatsController : ControllerBase
     [HttpGet("user/total")]
     public IActionResult GetUserTotalOnlineTime([FromQuery] string userId)
     {
+        var usersResponses = _showUsers.UsersShow("en");
         var totalTime = _userHistoricalData.GetTotalOnlineTime(userId);
     
         return Ok(new { totalTime });
@@ -54,8 +60,8 @@ public class StatsController : ControllerBase
     [HttpGet("user/average")]
     public IActionResult GetUserAverageOnlineTime([FromQuery] string userId)
     {
+        var usersResponses = _showUsers.UsersShow("en");
         var (weeklyAverage, dailyAverage) = _userHistoricalData.CalculateAverages(userId);
-    
         return Ok(new 
         {
             weeklyAverage,
@@ -66,6 +72,7 @@ public class StatsController : ControllerBase
     [HttpPost("forget")]
     public IActionResult ForgetUser([FromQuery] string userId, [FromQuery] List<string> forgottenUsers)
     {
+        var usersResponses = _showUsers.UsersShow("en");
         _userHistoricalData.ForgetUser(userId, forgottenUsers);
         return Ok(new 
         {

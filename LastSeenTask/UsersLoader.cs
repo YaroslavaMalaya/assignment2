@@ -14,7 +14,7 @@ public class User
 
 public interface IUserDataLoader
 {
-    UserData LoadUsers(int offset, List<string> forgottenUsers);
+    UserData LoadUsers(int offset, List<string> forgottenUsers, DateTime currentDate);
 }
 
 public class UsersLoader : IUserDataLoader
@@ -31,7 +31,7 @@ public class UsersLoader : IUserDataLoader
         _historicalDataStorageConcrete = historicalDataStorageConcrete;
     }
     
-    public UserData LoadUsers(int offset, List<string> forgottenUsers)
+    public UserData LoadUsers(int offset, List<string> forgottenUsers, DateTime currentDate)
     {
         var apiUrl = $"https://sef.podkolzin.consulting/api/users/lastSeen?offset={offset}";
         var response = _client.GetAsync(apiUrl).Result;
@@ -40,7 +40,7 @@ public class UsersLoader : IUserDataLoader
         {
             var json = response.Content.ReadAsStringAsync().Result;
             var userData = JsonConvert.DeserializeObject<UserData>(json);
-            UpdateHistoricalData(userData.data, forgottenUsers);
+            UpdateHistoricalData(userData.data, forgottenUsers, currentDate);
             return userData;
         }
         else
@@ -49,9 +49,8 @@ public class UsersLoader : IUserDataLoader
         }
     }
     
-    private void UpdateHistoricalData(User[] users, List<string> forgottenUsers)
+    private void UpdateHistoricalData(User[] users, List<string> forgottenUsers, DateTime currentDate)
     {
-        var currentDate = DateTime.UtcNow;
         foreach (var user in users)
         {
             if (!forgottenUsers.Contains(user.Nickname))
@@ -59,7 +58,12 @@ public class UsersLoader : IUserDataLoader
         }
         var countOfOnlineUsers = users.Count(user => user.LastSeenDate.HasValue && 
                                                      (currentDate - user.LastSeenDate.Value).TotalMinutes <= 60);
-        _historicalDataStorage.UsersOnlineData[currentDate] = countOfOnlineUsers;
+        if (_historicalDataStorage.UsersOnlineData.ContainsKey(currentDate.Date))
+            _historicalDataStorage.UsersOnlineData[currentDate.Date] += countOfOnlineUsers;
+        else
+        {
+            _historicalDataStorage.UsersOnlineData[currentDate.Date] = countOfOnlineUsers;
+        }
     }
 }
 

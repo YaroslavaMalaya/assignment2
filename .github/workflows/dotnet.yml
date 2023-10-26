@@ -12,17 +12,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v2  
+
       - name: Setup .NET
-        uses: actions/setup-dotnet@v3
+        uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 7.0.x
+
       - name: Restore dependencies
-        run: dotnet restore
-        working-directory: ./LastSeenTaskTests
+        run: dotnet restore LastSeenTask/LastSeenTask.csproj
+
       - name: Build
-        run: dotnet build --no-restore
+        run: dotnet build LastSeenTask/LastSeenTask.csproj --no-restore
+
       - name: UnitTest
-        run: dotnet test LastSeenTaskTests --no-build --verbosity normal
+        run: dotnet test LastSeenTaskTests/LastSeenTaskTests.csproj --no-build --verbosity normal
+
       - name: IntegrationTest
-        run: dotnet test LastSeenIntegrationTests --no-build --verbosity normal
+        run: dotnet test LastSeenIntegrationTests/LastSeenIntegrationTests.csproj --no-build --verbosity normal

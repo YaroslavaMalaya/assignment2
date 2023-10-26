@@ -6,7 +6,6 @@ namespace LastSeenTask.Tests;
 [TestFixture]
 public class UsersLoaderTests
 {
-    
     [Test]
     public async Task LoadUsers_ReturnsUserData_WhenHttpResponseIsSuccess()
     {

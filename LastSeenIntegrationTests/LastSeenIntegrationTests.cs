@@ -12,7 +12,6 @@ namespace LastSeenIntegrationTests;
 public class LastSeenIntegrationTests
 {
     private PredictionsController _controller;
-    private Mock<IHistoricalDataStorage> _mockStorage;
     private Mock<IHistoricalDataStorageConcrete> _mockStorageConcrete;
     private PredictionsController _controllerConcrete;
     private StatsController _controllerS;
@@ -31,10 +30,8 @@ public class LastSeenIntegrationTests
         _mockLastSeenFormatter = new Mock<ILastSeenFormatter>();
         _mockForgottenUsers = new List<string>();
         _mockStorageConcrete = new Mock<IHistoricalDataStorageConcrete>();
-        _mockStorage = new Mock<IHistoricalDataStorage>();
         _mockHistoricalDataStorage = new Mock<IHistoricalDataStorage>();
-    
-        _controller = new PredictionsController(_mockStorage.Object, _mockStorageConcrete.Object);
+        _controller = new PredictionsController(_mockHistoricalDataStorage.Object, _mockStorageConcrete.Object);
         _controllerS = new StatsController(_mockHistoricalDataStorage.Object, _mockShowUsers, _mockStorageConcrete.Object);
         _mockShowUsers = new ShowUsers(_mockUserDataLoader.Object, _mockLastSeenFormatter.Object, _mockForgottenUsers);
     
@@ -48,7 +45,7 @@ public class LastSeenIntegrationTests
         });
         var httpClient = new HttpClient(mockHttpHandler);
         
-        usersLoader = new UsersLoader(httpClient, _mockStorage.Object, _mockStorageConcrete.Object);
+        usersLoader = new UsersLoader(httpClient, _mockHistoricalDataStorage.Object, _mockStorageConcrete.Object);
     }
 
 
@@ -78,7 +75,7 @@ public class LastSeenIntegrationTests
     public void GetPredictedUserOnline_ReturnsExpectedValue()
     {
         var testDate = new DateTime(2023, 10, 30);
-        _mockStorage.Setup(m => m.GetAverageUsersForDayOfWeek(DayOfWeek.Monday)).Returns(10);
+        _mockHistoricalDataStorage.Setup(m => m.GetAverageUsersForDayOfWeek(DayOfWeek.Monday)).Returns(10);
 
         var result = _controller.GetPredictedUsersOnline(testDate);
         var okResult = result as OkObjectResult;

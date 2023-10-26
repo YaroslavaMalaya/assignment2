@@ -21,7 +21,7 @@ public class StatsController : ControllerBase
     [HttpGet("users")]
     public IActionResult GetUsersOnline([FromQuery] DateTime date)
     {
-        var usersResponses = _showUsers.UsersShow("en");
+        var usersResponses = _showUsers?.UsersShow("en");
         date = date.Date;
         int? usersOnlineCount = _historicalDataStorage.UsersOnlineData.GetValueOrDefault(date);
 
@@ -38,7 +38,7 @@ public class StatsController : ControllerBase
     [HttpGet("user")]
     public IActionResult GetUserOnlineData([FromQuery] DateTime date, [FromQuery] string userId)
     {
-        var usersResponses = _showUsers.UsersShow("en");
+        var usersResponses = _showUsers?.UsersShow("en");
         var userOnlineData = _userHistoricalData.GetUserHistoricalData(date, userId);
         if (userOnlineData == null)
         {
@@ -51,7 +51,7 @@ public class StatsController : ControllerBase
     [HttpGet("user/total")]
     public IActionResult GetUserTotalOnlineTime([FromQuery] string userId)
     {
-        var usersResponses = _showUsers.UsersShow("en");
+        var usersResponses = _showUsers?.UsersShow("en");
         var totalTime = _userHistoricalData.GetTotalOnlineTime(userId);
     
         return Ok(new { totalTime });
@@ -60,7 +60,7 @@ public class StatsController : ControllerBase
     [HttpGet("user/average")]
     public IActionResult GetUserAverageOnlineTime([FromQuery] string userId)
     {
-        var usersResponses = _showUsers.UsersShow("en");
+        var usersResponses = _showUsers?.UsersShow("en");
         var (weeklyAverage, dailyAverage) = _userHistoricalData.CalculateAverages(userId);
         return Ok(new 
         {
@@ -72,11 +72,11 @@ public class StatsController : ControllerBase
     [HttpPost("forget")]
     public IActionResult ForgetUser([FromQuery] string userId, [FromQuery] List<string> forgottenUsers)
     {
-        var usersResponses = _showUsers.UsersShow("en");
+        var usersResponses = _showUsers?.UsersShow("en");
         _userHistoricalData.ForgetUser(userId, forgottenUsers);
         return Ok(new 
         {
-            userId = userId
+            userId,
         });
     }
 }

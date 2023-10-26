@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 using LastSeenTask;
+using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Newtonsoft.Json;
@@ -13,23 +14,30 @@ public class LastSeenIntegrationTests
     private PredictionsController _controller;
     private Mock<IHistoricalDataStorage> _mockStorage;
     private Mock<IHistoricalDataStorageConcrete> _mockStorageConcrete;
-    private PredictionsControllerConcrete _controllerConcrete;
+    private PredictionsController _controllerConcrete;
     private StatsController _controllerS;
     private Mock<IHistoricalDataStorage> _mockHistoricalDataStorage;
-    private UsersLoader usersLoader;
+    private Mock<IUserDataLoader> _mockUserDataLoader;
     private MockHttpMessageHandler mockHttpHandler;
-    private IHistoricalDataStorage mockHistoricalDataStorage;
-    private IHistoricalDataStorageConcrete mockHistoricalDataStorageConcrete;
+    private ShowUsers _mockShowUsers;
+    private Mock<ILastSeenFormatter> _mockLastSeenFormatter;
+    private List<string> _mockForgottenUsers;
+    private UsersLoader usersLoader;
 
     [SetUp]
     public void Setup()
     {
+        _mockUserDataLoader = new Mock<IUserDataLoader>();
+        _mockLastSeenFormatter = new Mock<ILastSeenFormatter>();
+        _mockForgottenUsers = new List<string>();
         _mockStorageConcrete = new Mock<IHistoricalDataStorageConcrete>();
         _mockStorage = new Mock<IHistoricalDataStorage>();
-        _controller = new PredictionsController(_mockStorage.Object);
         _mockHistoricalDataStorage = new Mock<IHistoricalDataStorage>();
-        _controllerS = new StatsController(_mockHistoricalDataStorage.Object);
-        
+    
+        _controller = new PredictionsController(_mockStorage.Object, _mockStorageConcrete.Object);
+        _controllerS = new StatsController(_mockHistoricalDataStorage.Object, _mockShowUsers, _mockStorageConcrete.Object);
+        _mockShowUsers = new ShowUsers(_mockUserDataLoader.Object, _mockLastSeenFormatter.Object, _mockForgottenUsers);
+    
         mockHttpHandler = new MockHttpMessageHandler(new HttpResponseMessage
         {
             StatusCode = HttpStatusCode.OK,
@@ -39,19 +47,21 @@ public class LastSeenIntegrationTests
                 "application/json")
         });
         var httpClient = new HttpClient(mockHttpHandler);
-            
-        usersLoader = new UsersLoader(httpClient, mockHistoricalDataStorage, mockHistoricalDataStorageConcrete);
+        
+        usersLoader = new UsersLoader(httpClient, _mockStorage.Object, _mockStorageConcrete.Object);
     }
+
 
     [Test]
     public void GetPredictedUsersOnlineConcrete_ReturnsExpectedValue()
     {
+        var mockHistoricalDataStorage = new Mock<IHistoricalDataStorage>();
         var mockHistoricalDataStorageConcrete = new Mock<IHistoricalDataStorageConcrete>();
         mockHistoricalDataStorageConcrete.Setup(m => m.CalculateOnlineChance(It.IsAny<DateTime>(), 
                 It.IsAny<double>(), It.IsAny<string>()))
             .Returns(0.6);
 
-        var controller = new PredictionsControllerConcrete(mockHistoricalDataStorageConcrete.Object);
+        var controller = new PredictionsController(mockHistoricalDataStorage.Object, mockHistoricalDataStorageConcrete.Object);
         var date = DateTime.UtcNow;
         var tolerance = 0.5;
         var userId = "sampleUserId";
@@ -107,9 +117,9 @@ public class LastSeenIntegrationTests
             StatusCode = HttpStatusCode.BadRequest
         });
         var httpClient = new HttpClient(mockHttpHandler);
-        usersLoader = new UsersLoader(httpClient, mockHistoricalDataStorage, mockHistoricalDataStorageConcrete);
+        usersLoader = new UsersLoader(httpClient, _mockHistoricalDataStorage.Object, new HistoricalDataStorageConcrete());
 
-        var userData = usersLoader.LoadUsers(offset);
+        var userData = usersLoader.LoadUsers(offset, new List<string>(), DateTime.Now);
 
         Assert.IsNotNull(userData);
         Assert.IsNull(userData.data);

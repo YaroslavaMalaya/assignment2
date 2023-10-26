@@ -1,19 +1,20 @@
 using LastSeenTask;
+using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 namespace LastSeenIntegrationTests;
 
 public class HistoricalDataStorageConcreteIntegrationTests
 {
-    private StatsControllerConcrete _statsController;
-    private PredictionsControllerConcrete _predictionsController;
+    private StatsController _statsController;
+    private PredictionsController _predictionsController;
     private HistoricalDataStorageConcrete _dataStorage;
 
     [SetUp]
     public void Setup()
     {
         _dataStorage = new HistoricalDataStorageConcrete();
-        _statsController = new StatsControllerConcrete(null, _dataStorage);
-        _predictionsController = new PredictionsControllerConcrete(_dataStorage);
+        _statsController = new StatsController(null, null, _dataStorage);
+        _predictionsController = new PredictionsController(null, _dataStorage);
     }
 
     [Test]
@@ -22,7 +23,7 @@ public class HistoricalDataStorageConcreteIntegrationTests
         string userId = "User123";
         _dataStorage.AddUserData(DateTimeOffset.UtcNow, new User { Nickname = userId, LastSeenDate = DateTimeOffset.UtcNow});
 
-        var result = _statsController.ForgetUser(userId) as OkObjectResult;
+        var result = _statsController.ForgetUser(userId, new List<string>()) as OkObjectResult;
         var returnedUserId = result?.Value.GetType().GetProperty("userId").GetValue(result.Value) as string;
         
         Assert.IsNotNull(result);

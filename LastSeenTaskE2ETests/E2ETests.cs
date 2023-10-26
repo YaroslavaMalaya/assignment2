@@ -16,7 +16,7 @@ public class E2ETests
     [Test]
     public async Task TestGetUserOnlineData()
     {
-        var response = await _client.GetAsync("/api/stats/user?date=2023-10-19T00:00:00.000Z&userId=JohnDoe");
+        var response = await _client.GetAsync("/api/stats/user?date=2023-10-19T00:00:00.000Z&userId=Margarita85");
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
         var responseContent = await response.Content.ReadAsStringAsync();
@@ -28,7 +28,7 @@ public class E2ETests
     [Test]
     public async Task TestGetUserTotalOnlineTime()
     {
-        var response = await _client.GetAsync("/api/stats/user/total?userId=JohnDoe");
+        var response = await _client.GetAsync("/api/stats/user/total?userId=Margarita85");
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
         var responseContent = await response.Content.ReadAsStringAsync();
@@ -40,7 +40,7 @@ public class E2ETests
     [Test]
     public async Task TestGetUserAverageOnlineTime()
     {
-        var response = await _client.GetAsync("/api/stats/user/average?userId=JohnDoe");
+        var response = await _client.GetAsync("/api/stats/user/average?userId=Margarita85");
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
         var responseContent = await response.Content.ReadAsStringAsync();
@@ -53,7 +53,7 @@ public class E2ETests
     [Test]
     public async Task TestGetPredictedUserOnline()
     {
-        var response = await _client.GetAsync("/api/predictions/user?date=2023-10-19T00:00:00.000Z&tolerance=0.5&userId=JohnDoe");
+        var response = await _client.GetAsync("/api/predictions/user?date=2023-10-19T00:00:00.000Z&tolerance=0.5&userId=Margarita85");
         Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
         var responseContent = await response.Content.ReadAsStringAsync();

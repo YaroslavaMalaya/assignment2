@@ -19,6 +19,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\LastSeenTask\LastSeenTask.csproj" />
+        <ProjectReference Include="..\LastSeenTaskAPI\LastSeenTaskAPI.csproj" />
     </ItemGroup>
     
 </Project>

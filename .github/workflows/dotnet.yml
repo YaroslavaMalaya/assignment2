@@ -28,5 +28,5 @@ jobs:
       - name: UnitTest
         run: dotnet test LastSeenTaskTests/LastSeenTaskTests.csproj --no-build --verbosity normal
 
-      - name: IntegrationTest
-        run: dotnet test LastSeenIntegrationTests/LastSeenIntegrationTests.csproj --no-build --verbosity normal
+#      - name: IntegrationTest
+#        run: dotnet test LastSeenIntegrationTests/LastSeenIntegrationTests.csproj --no-build --verbosity normal

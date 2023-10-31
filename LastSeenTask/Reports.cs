@@ -43,6 +43,7 @@ public interface IReports
 {
     void CreateReport(string name, List<string> metrics, List<string> userIds, DateTime startDate, DateTime endDate);
     Dictionary<string, ReportResult> GetReport(string name);
+    Dictionary<string, double> GetGlobalMetrics(string name, DateTime? fromDate, DateTime? toDate);
 }
 
 public class Reports : IReports
@@ -92,7 +93,40 @@ public class Reports : IReports
             throw new KeyNotFoundException("The requested report does not exist.");
         }
     }
+    
+    public Dictionary<string, double> GetGlobalMetrics(string name, DateTime? fromDate = null, DateTime? toDate = null)
+    {
+        if (_reports.TryGetValue(name, out var report))
+        {
+            var globalMetrics = new Dictionary<string, double>();
+            var userMetrics = new List<Dictionary<string, double>>();
 
+            foreach (var userId in report.UserIds)
+            {
+                var metrics = new Dictionary<string, double>();
+                foreach (var metric in report.Metrics)
+                {
+                    var value = CalculateMetric(metric, userId, fromDate ?? report.StartDate, toDate ?? report.EndDate);
+                    metrics[metric] = value;
+                }
+                userMetrics.Add(metrics);
+            }
+
+            foreach (var metric in report.Metrics)
+            {
+                var total = userMetrics.Sum(um => um[metric]);
+                var average = total / userMetrics.Count;
+                globalMetrics[metric] = average;
+            }
+
+            return globalMetrics;
+        }
+        else
+        {
+            throw new KeyNotFoundException("The requested report does not exist.");
+        }
+    }
+    
     private double CalculateMetric(string metric, string userId, DateTime startDate, DateTime endDate)
 {
     // check if the user has any online history data
@@ -112,6 +146,7 @@ public class Reports : IReports
             var dailyAverage = relevantData
                 .GroupBy(kvp => kvp.Key.Date)
                 .Select(group => group.Count(kvp => kvp.Value))
+                .DefaultIfEmpty(0)
                 .Average();
             return dailyAverage;
 
@@ -146,42 +181,54 @@ public class Reports : IReports
 
 }
 
-[ApiController]
-[Route("api/report")]
-public class ReportController : ControllerBase
-{
-    private readonly IReports _reports;
-
-    public ReportController(IReports reports)
-    {
-        _reports = reports;
-    }
-
-    [HttpPost("{reportName}")]
-    public IActionResult CreateReport(string reportName, [FromBody] ReportRequest request)
-    {
-        try
-        {
-            _reports.CreateReport(reportName, request.Metrics, request.Users, request.StartDate, request.EndDate);
-            return Ok(new {});
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
-    [HttpGet("{reportName}")]
-    public IActionResult GetReport(string reportName)
-    {
-        try
-        {
-            var report = _reports.GetReport(reportName);
-            return Ok(report);
-        }
-        catch (KeyNotFoundException)
-        {
-            return NotFound();
-        }
-    }
-}
+// [ApiController]
+// [Route("api/report")]
+// public class ReportController : ControllerBase
+// {
+//     private readonly IReports _reports;
+//
+//     public ReportController(IReports reports)
+//     {
+//         _reports = reports;
+//     }
+//
+//     [HttpPost("/create/{reportName}")]
+//     public IActionResult CreateReport(string reportName, [FromBody] ReportRequest request)
+//     {
+//         try
+//         {
+//             _reports.CreateReport(reportName, request.Metrics, request.Users, request.StartDate, request.EndDate);
+//             return Ok(new {});
+//         }
+//         catch (Exception ex)
+//         {
+//             return BadRequest(ex.Message);
+//         }
+//     }
+//
+//     [HttpGet("/get/{reportName}")]
+//     public IActionResult GetReport(string reportName, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
+//     {
+//         try
+//         {
+//             var userResults = _reports.GetReport(reportName);
+//             var globalMetrics = _reports.GetGlobalMetrics(reportName, from, to);
+//
+//             var result = new
+//             {
+//                 users = userResults.Select(ur => new 
+//                 {
+//                     userId = ur.Value.UserId,
+//                     metrics = ur.Value.Metrics.Select(m => new { metric = m.Key, value = m.Value }).ToList()
+//                 }).ToList(),
+//                 globalMetrics
+//             };
+//
+//             return Ok(result);
+//         }
+//         catch (KeyNotFoundException)
+//         {
+//             return NotFound();
+//         }
+//     }
+// }

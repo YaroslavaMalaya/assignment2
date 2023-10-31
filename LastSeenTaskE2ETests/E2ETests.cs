@@ -99,6 +99,15 @@ public class E2ETests
         var totalTimeResult = _controllerS.GetUserTotalOnlineTime(userId) as OkObjectResult;
         var totalOnlineTime = (long)(totalTimeResult.Value.GetType().GetProperty("totalTime").GetValue(totalTimeResult.Value));
         Assert.That(totalOnlineTime, Is.EqualTo(expectedTotalTime));
+        
+        // Getting a Report
+        var reportName = "TestReport";
+        var expectedReport = new Dictionary<string, ReportResult>{
+            {        
+                "User1", new ReportResult("User1", new Dictionary<string, double>{{ "dailyAverage", 5.0 }})}
+        };
+        _mockReports.Setup(r => r.GetReport(reportName)).Returns(expectedReport);
+        var reportActionResult = _controllerReport.GetReport(reportName) as OkObjectResult;var reportResult = reportActionResult.Value as Dictionary<string, ReportResult>;
+        Assert.That(reportResult["User1"].Metrics["dailyAverage"], Is.EqualTo(expectedReport["User1"].Metrics["dailyAverage"]));
     }
-
 }

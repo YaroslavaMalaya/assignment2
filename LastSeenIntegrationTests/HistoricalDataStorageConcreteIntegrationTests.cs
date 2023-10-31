@@ -1,6 +1,8 @@
 using LastSeenTask;
 using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
+using Moq;
+using ReportController = LastSeenTask.ReportController;
 namespace LastSeenIntegrationTests;
 
 public class HistoricalDataStorageConcreteIntegrationTests
@@ -8,6 +10,8 @@ public class HistoricalDataStorageConcreteIntegrationTests
     private StatsController _statsController;
     private PredictionsController _predictionsController;
     private HistoricalDataStorageConcrete _dataStorage;
+    private Mock<IReports> _mockReports;
+    private ReportController _controllerReport;
 
     [SetUp]
     public void Setup()
@@ -15,6 +19,8 @@ public class HistoricalDataStorageConcreteIntegrationTests
         _dataStorage = new HistoricalDataStorageConcrete();
         _statsController = new StatsController(null, null, _dataStorage);
         _predictionsController = new PredictionsController(null, _dataStorage);
+        _mockReports = new Mock<IReports>();
+        _controllerReport = new ReportController(_mockReports.Object);
     }
 
     [Test]
@@ -55,5 +61,32 @@ public class HistoricalDataStorageConcreteIntegrationTests
 
         Assert.IsNotNull(result);
         Assert.IsTrue(dailyAverage > 0);
+    }
+    
+    [Test]
+    public void When_GettingReport_Expect_SuccessfulResponse()
+    {
+        string reportName = "TestReport";
+
+        var expectedReport = new Dictionary<string, ReportResult>
+        {
+            {
+                "User1", new ReportResult("User1", new Dictionary<string, double>
+                {
+                    { "dailyAverage", 5.0 }
+                })
+            }
+        };
+
+        _mockReports.Setup(r => r.GetReport(reportName)).Returns(expectedReport);
+
+        var actionResult = _controllerReport.GetReport(reportName);
+        var okResult = actionResult as OkObjectResult;
+
+        var reportResult = okResult.Value as Dictionary<string, ReportResult>;
+
+        Assert.IsNotNull(okResult);
+        Assert.That(okResult.StatusCode, Is.EqualTo(200));
+        Assert.That(reportResult["User1"].Metrics["dailyAverage"], Is.EqualTo(expectedReport["User1"].Metrics["dailyAverage"]));
     }
 }

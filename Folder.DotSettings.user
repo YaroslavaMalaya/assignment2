@@ -15,15 +15,20 @@
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=7262e6b3_002D59db_002D4d44_002D9397_002D58440639fee9/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="When_GettingReport_Expect_SuccessfulResponse" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests.When_GettingReport_Expect_SuccessfulResponse&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
 	
 	
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b6f060f4_002D54ce_002D4d6a_002D8208_002D04388e51ff28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="E2ETests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=b6f060f4_002D54ce_002D4d6a_002D8208_002D04388e51ff28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="E2ETests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.E2ETests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.ReportsTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e44ee93c_002D454c_002D421f_002D9512_002Defea33e95e28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="HistoricalDataStorageConcreteTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=e44ee93c_002D454c_002D421f_002D9512_002Defea33e95e28/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="HistoricalDataStorageConcreteTests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.HistoricalDataStorageConcreteTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::43D65DE2-537D-21F8-40C2-00741F82FC04::net7.0::LastSeenTaskTests.PredictionsControllerTests&lt;/TestId&gt;&#xD;
@@ -50,6 +55,7 @@
     &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.LastSeenIntegrationTests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::7F49F2B0-E068-B87B-9BFA-7500853FBA29::net7.0::LastSeenTaskAPI.Tests.E2ETests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests.ForgetUserIntegration_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests.When_GettingReport_Expect_SuccessfulResponse&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

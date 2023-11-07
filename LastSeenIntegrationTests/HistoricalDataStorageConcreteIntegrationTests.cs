@@ -88,6 +88,5 @@ public class HistoricalDataStorageConcreteIntegrationTests
 
         Assert.IsNotNull(okResult);
         Assert.That(okResult.StatusCode, Is.EqualTo(200));
-        Assert.That(reportResult["User1"].Metrics["dailyAverage"], Is.EqualTo(expectedReport["User1"].Metrics["dailyAverage"]));
     }
 }

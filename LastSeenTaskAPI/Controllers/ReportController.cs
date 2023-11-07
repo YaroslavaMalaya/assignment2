@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LastSeenTaskAPI.Controllers;
 
 [ApiController]
-[Route("api/report")]
+[Route("api/reports")]
 public class ReportController : ControllerBase
 {
     private readonly IReports _reports;
@@ -50,6 +50,28 @@ public class ReportController : ControllerBase
         catch (KeyNotFoundException)
         {
             return NotFound();
+        }
+    }
+    
+    [HttpGet]
+    public IActionResult GetReports()
+    {
+        try
+        {
+            var reports = _reports.GetAllReports().Select(report => new
+            {
+                name = report.Name,
+                metrics = report.Metrics,
+                users = report.UserIds,
+                startDate = report.StartDate,
+                endDate = report.EndDate
+            }).ToList();
+
+            return Ok(reports);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, new { message = ex.Message });
         }
     }
 }

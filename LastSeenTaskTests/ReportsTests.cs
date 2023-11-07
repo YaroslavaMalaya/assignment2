@@ -56,10 +56,26 @@ public class ReportsTests
 
         var actionResult = _controller.GetReport(reportName, null, null);
         var okResult = actionResult as OkObjectResult;
-        var reportResult = okResult.Value as Dictionary<string, ReportResult>;
 
         Assert.IsNotNull(okResult);
         Assert.That(okResult.StatusCode, Is.EqualTo(200));
-        //Assert.That(reportResult["User1"].Metrics["dailyAverage"], Is.EqualTo(expectedReport["User1"].Metrics["dailyAverage"]));
+    }
+    
+    [Test]
+    public void When_GettingAllReports_Expect_SuccessfulResponse()
+    {
+        var expectedReports = new List<Report>
+        {
+            new Report("Report1", new List<string> { "dailyAverage" }, new List<string> { "User1" }, DateTime.Now.AddDays(-7), DateTime.Now),
+            new Report("Report2", new List<string> { "total" }, new List<string> { "User2" }, DateTime.Now.AddMonths(-1), DateTime.Now)
+        };
+
+        _mockReports.Setup(r => r.GetAllReports()).Returns(expectedReports);
+
+        var actionResult = _controller.GetReports();
+        var okResult = actionResult as OkObjectResult;
+
+        Assert.IsNotNull(okResult);
+        Assert.That(okResult.StatusCode, Is.EqualTo(200));
     }
 }

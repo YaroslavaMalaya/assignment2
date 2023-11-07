@@ -2,7 +2,7 @@ using LastSeenTask;
 using LastSeenTaskAPI.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using ReportController = LastSeenTask.ReportController;
+using LastSeenTaskAPI.Controllers;
 namespace LastSeenIntegrationTests;
 
 public class HistoricalDataStorageConcreteIntegrationTests
@@ -21,6 +21,7 @@ public class HistoricalDataStorageConcreteIntegrationTests
         _predictionsController = new PredictionsController(null, _dataStorage);
         _mockReports = new Mock<IReports>();
         _controllerReport = new ReportController(_mockReports.Object);
+
     }
 
     [Test]
@@ -80,7 +81,7 @@ public class HistoricalDataStorageConcreteIntegrationTests
 
         _mockReports.Setup(r => r.GetReport(reportName)).Returns(expectedReport);
 
-        var actionResult = _controllerReport.GetReport(reportName);
+        var actionResult = _controllerReport.GetReport(reportName, null, null);
         var okResult = actionResult as OkObjectResult;
 
         var reportResult = okResult.Value as Dictionary<string, ReportResult>;

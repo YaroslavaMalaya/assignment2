@@ -44,6 +44,7 @@ public interface IReports
     void CreateReport(string name, List<string> metrics, List<string> userIds, DateTime startDate, DateTime endDate);
     Dictionary<string, ReportResult> GetReport(string name);
     Dictionary<string, double> GetGlobalMetrics(string name, DateTime? fromDate, DateTime? toDate);
+    List<Report> GetAllReports();
 }
 
 public class Reports : IReports
@@ -127,8 +128,13 @@ public class Reports : IReports
         }
     }
     
+    public List<Report> GetAllReports()
+    {
+        return _reports.Values.ToList();
+    }
+    
     private double CalculateMetric(string metric, string userId, DateTime startDate, DateTime endDate)
-{
+    {
     // check if the user has any online history data
     if (!_historicalDataStorageConcrete.UserOnlineHistory.ContainsKey(userId))
     {

@@ -29,7 +29,7 @@ jobs:
         run: dotnet test LastSeenTaskTests/LastSeenTaskTests.csproj --no-build --verbosity normal
 
       - name: IntegrationTest
-        run: dotnet test LastSeenIntegrationTests --no-build --verbosity detailed
+        run: dotnet test LastSeenIntegrationTests --no-build --verbosity normal
       
       - name: E2ETest
-        run: dotnet test LastSeenTaskE2ETests --no-build --verbosity detailed
+        run: dotnet test LastSeenTaskE2ETests --no-build --verbosity normal

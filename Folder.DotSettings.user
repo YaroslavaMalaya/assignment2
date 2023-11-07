@@ -56,6 +56,7 @@
     &lt;TestId&gt;NUnit3x::7F49F2B0-E068-B87B-9BFA-7500853FBA29::net7.0::LastSeenTaskAPI.Tests.E2ETests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests.ForgetUserIntegration_ReturnsExpectedValue&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests.When_GettingReport_Expect_SuccessfulResponse&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::1C63F19C-D84C-7B6E-BD22-3A68C622D180::net7.0::LastSeenIntegrationTests.HistoricalDataStorageConcreteIntegrationTests&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String>
 	</wpf:ResourceDictionary>

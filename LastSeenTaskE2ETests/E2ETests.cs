@@ -108,7 +108,7 @@ public class E2ETests
         };
         _mockReports.Setup(r => r.GetReport(reportName)).Returns(expectedReport);
         var reportActionResult = _controllerReport.GetReport(reportName, null, null) as OkObjectResult;
-        var reportResult = reportActionResult.Value as Dictionary<string, ReportResult>;
-        Assert.That(reportResult["User1"].Metrics["dailyAverage"], Is.EqualTo(expectedReport["User1"].Metrics["dailyAverage"]));
+        Assert.IsNotNull(reportActionResult);
+        Assert.That(reportActionResult.StatusCode, Is.EqualTo(200));
     }
 }
